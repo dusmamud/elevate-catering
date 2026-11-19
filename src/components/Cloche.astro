@@ -1,0 +1,5 @@
+---
+export interface Props { size?: number; class?: string }
+const { size = 28, class: cls = '' } = Astro.props;
+---
+<svg width={size} height={size} viewBox="0 0 48 48" fill="none" class={cls} aria-hidden="true"><g stroke="#c0a062" stroke-width="2.4" stroke-linecap="round"><path d="M10 30a14 11 0 0 1 28 0"/><path d="M6 34h36"/><circle cx="24" cy="14" r="2" fill="#c0a062"/><path d="M17 40h14"/></g></svg>

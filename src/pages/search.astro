@@ -1,0 +1,79 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import { services, menus, blogPosts, venues } from '../data/site';
+const pages = [
+  { title: 'Home', href: '/', text: 'Elevate Catering exquisite catering services corporate weddings special occasions get a quote' },
+  { title: 'About Us', href: '/about/', text: 'About Elevate Catering Bandra kitchen story team 850 events FSSAI' },
+  { title: 'Services', href: '/services/', text: 'Corporate events weddings private parties galas drop-off full-service catering services' },
+  { title: 'Menus', href: '/menus/', text: 'Menus wedding celebration corporate lunch private party seasonal tasting per guest price dietary' },
+  { title: 'Gallery', href: '/gallery/', text: 'Gallery photos weddings corporate private parties behind the scenes tablescape canapes' },
+  { title: 'Our Process', href: '/process/', text: 'Process enquiry tasting menu design proposal event day follow-up steps' },
+  { title: 'Pricing', href: '/pricing/', text: 'Pricing per guest 1450 2250 3400 essential signature royal packages' },
+  { title: 'Get a Quote', href: '/quote/', text: 'Get a quote enquiry event date guest count venue budget tasting' },
+  { title: 'Venues', href: '/venues/', text: 'Venues Taj Lands End Leela ITC Goa Aamby Valley Mumbai Delhi Bengaluru destination' },
+  { title: 'Our Team', href: '/team/', text: 'Team chef Arjun Mehra Priya Nair Rohan Kapoor Sana Sheikh chefs' },
+  { title: 'Reviews', href: '/reviews/', text: 'Reviews testimonials hosts weddings corporate private parties 4.9 rating' },
+  { title: 'FAQ', href: '/faq/', text: 'Frequently asked questions cost tasting dietary Jain vegan gluten-free booking FSSAI cancellation' },
+  { title: 'Contact Us', href: '/contact/', text: 'Contact email phone Mumbai Bandra enquiry' },
+];
+const entries = [
+  ...pages.map((p) => ({ ...p, kind: 'Page' })),
+  ...services.map((s) => ({ title: s.title, href: `/services/${s.slug}/`, text: `${s.title} ${s.short} ${s.price} ${s.points.join(' ')}`, kind: 'Service' })),
+  ...menus.map((m) => ({ title: m.title, href: `/menus/${m.slug}/`, text: `${m.title} ${m.tagline} ${m.price} menu courses`, kind: 'Menu' })),
+  ...venues.map((v) => ({ title: v.name, href: '/venues/', text: `${v.name} ${v.city} ${v.style} ${v.capacity} venue`, kind: 'Venue' })),
+  ...blogPosts.map((p) => ({ title: p.title, href: `/blog/${p.slug}/`, text: `${p.title} ${p.category} ${p.excerpt} ${p.author}`, kind: 'Article' })),
+];
+const lead = 'Search every page, service, menu, venue and article on the Elevate Catering site — right here, in your browser. Nothing leaves your device.';
+---
+<Layout title="Search — Elevate Catering" description="Search the Elevate Catering site: services, menus, venues, gallery, pricing and articles." lead={lead} robots="noindex">
+  <PageHero eyebrow="Search" title="Find it at Elevate." lead={lead} />
+  <section class="bg-cream px-4 pb-14 sm:px-6">
+    <div class="mx-auto max-w-3xl">
+      <form id="search-form" role="search" class="reveal flex overflow-hidden rounded-full border border-line bg-white shadow-sm">
+        <label class="sr-only" for="search-input">Search the site</label>
+        <input id="search-input" type="search" placeholder="Try “wedding”, “pricing”, “Jain”, “venues”…" autocomplete="off" class="w-full min-w-0 bg-transparent px-5 py-3.5 text-sm text-ink outline-none placeholder:text-ink/40" />
+        <button type="submit" class="shrink-0 bg-forest px-5 text-sm font-semibold text-cream transition hover:bg-gold hover:text-forest">Search</button>
+      </form>
+      <p id="search-count" class="mt-4 text-sm text-ink/55" role="status"></p>
+      <div id="search-results" class="mt-4 space-y-3">
+        {entries.map((e) => (
+          <a href={e.href} data-title={e.title.toLowerCase()} data-text={e.text.toLowerCase()} class="search-item reveal block rounded-2xl bg-white p-5 shadow-sm ring-1 ring-line transition hover:ring-gold">
+            <span class="rounded-full bg-sage px-3 py-1 text-[11px] font-black uppercase tracking-wider text-forest">{e.kind}</span>
+            <h2 class="mt-2 font-display text-lg font-bold text-forest">{e.title}</h2>
+            <p class="mt-1 text-sm text-ink/60">{e.text.slice(0, 140)}{e.text.length > 140 ? '…' : ''}</p>
+          </a>
+        ))}
+      </div>
+      <p id="search-empty" class="mt-6 hidden rounded-2xl bg-white p-6 text-sm text-ink/70 shadow-sm ring-1 ring-line">Nothing matched that search. Try “wedding”, “pricing”, “menus” or “venues” — or <a href="/contact/" class="font-semibold text-gold-deep underline-offset-4 hover:underline">ask us directly</a>.</p>
+    </div>
+  </section>
+  <ContactCTA />
+</Layout>
+<script>
+  const input = document.getElementById('search-input');
+  const items = [...document.querySelectorAll('.search-item')];
+  const count = document.getElementById('search-count');
+  const empty = document.getElementById('search-empty');
+  const apply = (q) => {
+    const query = q.trim().toLowerCase();
+    let shown = 0;
+    items.forEach((el) => {
+      const hay = (el.dataset.title || '') + ' ' + (el.dataset.text || '');
+      const match = !query || query.split(/\s+/).every((w) => hay.includes(w));
+      el.classList.toggle('hidden', !match);
+      if (match) shown++;
+    });
+    if (count) count.textContent = query ? `${shown} result${shown === 1 ? '' : 's'} for “${q.trim()}”` : `${items.length} pages, services, menus, venues and articles on this site.`;
+    empty?.classList.toggle('hidden', shown > 0);
+  };
+  const params = new URLSearchParams(window.location.search);
+  const initial = params.get('q') || '';
+  if (input) {
+    input.value = initial;
+    input.addEventListener('input', () => apply(input.value));
+  }
+  document.getElementById('search-form')?.addEventListener('submit', (e) => { e.preventDefault(); if (input) apply(input.value); });
+  apply(initial);
+</script>

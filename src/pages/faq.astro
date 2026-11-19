@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import { faqs } from '../data/site';
+const jsonLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
+const lead = 'Prices, tastings, dietary needs, lead times and licences — answered honestly. Anything else? Write to hello@elevatecatering.in.';
+---
+<Layout title="FAQ — Elevate Catering" description={lead} jsonLd={jsonLd} lead={lead}>
+  <PageHero eyebrow="FAQ" title="Questions, answered." lead={lead} />
+  <section class="bg-cream px-4 pb-14 sm:px-6">
+    <div class="mx-auto max-w-3xl space-y-3">
+      {faqs.map((f, i) => (
+        <div class="faq-item reveal rounded-2xl bg-white shadow-sm ring-1 ring-line">
+          <button type="button" data-faq-btn aria-expanded={i === 0 ? 'true' : 'false'} aria-controls={`faq-panel-${i}`} id={`faq-btn-${i}`} class="flex w-full items-center justify-between gap-4 p-5 text-left font-display text-lg font-bold text-forest">{f.q}<span class="faq-icon shrink-0 text-gold-deep" aria-hidden="true">+</span></button>
+          <div id={`faq-panel-${i}`} class="faq-panel" data-open={i === 0 ? 'true' : 'false'} role="region" aria-labelledby={`faq-btn-${i}`}><div><p class="px-5 pb-5 text-sm leading-relaxed text-ink/70">{f.a}</p></div></div>
+        </div>
+      ))}
+    </div>
+  </section>
+  <ContactCTA />
+</Layout>

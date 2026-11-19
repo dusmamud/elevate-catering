@@ -1,0 +1,23 @@
+---
+import { faqs } from '../data/site';
+const preview = faqs.slice(0, 4);
+---
+<section class="bg-cream px-4 py-14 sm:px-6" aria-labelledby="home-faq-heading">
+  <div class="mx-auto max-w-3xl">
+    <div class="reveal text-center">
+      <h2 id="home-faq-heading" class="font-display text-3xl font-bold text-forest sm:text-4xl">Questions, <span class="gold">answered.</span></h2>
+      <p class="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-ink/60">Prices, tastings, dietary needs and booking lead times — the questions every host asks.</p>
+    </div>
+    <div class="mt-8 space-y-3">
+      {preview.map((f, i) => (
+        <div class="faq-item reveal rounded-2xl bg-white shadow-sm ring-1 ring-line">
+          <button type="button" data-faq-btn aria-expanded={i === 0 ? 'true' : 'false'} aria-controls={`home-faq-panel-${i}`} id={`home-faq-btn-${i}`} class="flex w-full items-center justify-between gap-4 p-5 text-left font-display text-lg font-bold text-forest">{f.q}<span class="faq-icon shrink-0 text-gold-deep" aria-hidden="true">+</span></button>
+          <div id={`home-faq-panel-${i}`} class="faq-panel" data-open={i === 0 ? 'true' : 'false'} role="region" aria-labelledby={`home-faq-btn-${i}`}><div><p class="px-5 pb-5 text-sm leading-relaxed text-ink/70">{f.a}</p></div></div>
+        </div>
+      ))}
+    </div>
+    <div class="reveal mt-6 text-center">
+      <a href="/faq/" class="inline-block rounded-full bg-forest px-6 py-3 text-sm font-bold text-cream transition hover:bg-gold hover:text-forest">Read all FAQs →</a>
+    </div>
+  </div>
+</section>

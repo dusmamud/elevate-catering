@@ -1,0 +1,55 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import { services, contact, pricingPlans } from '../data/site';
+const jsonLd = { '@context': 'https://schema.org', '@type': 'HowTo', name: 'How to get a catering quote from Elevate Catering', description: 'Get a fixed per-person catering quote in three steps — pick a service, an event date window and a time, then leave your details.', step: [ { '@type': 'HowToStep', name: 'Pick a service', text: 'Choose your event type, or Not sure yet.' }, { '@type': 'HowToStep', name: 'Pick a date window and style', text: 'Choose one of the next 7 days for your tasting call and a service style.' }, { '@type': 'HowToStep', name: 'Leave your details', text: 'Your mail app opens with everything prefilled — press send and we reply within one working day.' } ] };
+const lead = 'The catering inquiry that caterers wish everyone sent: event type, date, guests and venue — up front. Pick a tasting day below and we will reply with availability and a fixed per-person proposal.';
+---
+<Layout title="Get a Quote — Elevate Catering" description="Get a fixed per-person catering quote: event type, date, guest count and venue. Free tasting, reply within one working day." jsonLd={jsonLd} lead={lead}>
+  <PageHero eyebrow="Get a Quote" title="Your event, priced honestly." lead={lead} />
+  <section class="bg-cream px-4 pb-14 sm:px-6">
+    <div class="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1fr_1.4fr]">
+      <div class="reveal">
+        <h2 class="font-display text-2xl font-bold text-forest">What you get</h2>
+        <ul class="mt-4 space-y-3 text-sm leading-relaxed text-ink/70">
+          <li class="flex gap-3"><span class="text-gold-deep">✓</span>A free guided tasting of your shortlisted menu.</li>
+          <li class="flex gap-3"><span class="text-gold-deep">✓</span>A fixed per-person quote in writing — no hidden charges later.</li>
+          <li class="flex gap-3"><span class="text-gold-deep">✓</span>Packages from {pricingPlans[0].price} to {pricingPlans[2].price} per guest, compared openly.</li>
+        </ul>
+        <p class="mt-6 text-sm text-ink/55">Prefer to write first? Email <a href={`mailto:${contact.email}`} class="font-semibold text-forest underline decoration-gold underline-offset-4">{contact.email}</a><br />{contact.hours} · Bandra West, Mumbai</p>
+        <p class="mt-4 text-sm text-ink/55">Wondering what happens next? <a href="/process/" class="font-semibold text-gold-deep underline-offset-4 hover:underline">See our process →</a></p>
+      </div>
+      <form id="book-form" class="reveal rounded-3xl bg-white p-6 shadow-sm ring-1 ring-line sm:p-8" novalidate>
+        <label for="bk-service" class="text-sm font-semibold text-forest">What kind of event is it?</label>
+        <select id="bk-service" class="mt-1.5 w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink outline-none placeholder:text-ink/35 focus:border-gold">
+          <option value="Not sure yet">Not sure yet — help me decide</option>
+          {services.map((s) => (<option value={s.title}>{s.title} — {s.price}</option>))}
+          {pricingPlans.map((p) => (<option value={p.name + ' package'}>{p.name} package — {p.price} per guest</option>))}
+        </select>
+        <p class="mt-6 text-sm font-semibold text-forest">Pick a day for your tasting call</p>
+        <div id="bk-days" class="mt-2 grid grid-cols-3 gap-2 sm:grid-cols-4" role="group" aria-label="Day"></div>
+        <p class="mt-6 text-sm font-semibold text-forest">Pick a time (IST)</p>
+        <div id="bk-slots" class="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-4" role="group" aria-label="Time slot"></div>
+        <p id="bk-slot-error" class="field-error invisible text-red-600" role="alert">Please pick a time slot.</p>
+        <div class="mt-6 grid gap-4 sm:grid-cols-2">
+          <div>
+            <label for="bk-name" class="text-sm font-semibold text-forest">Your name *</label>
+            <input id="bk-name" required minlength="2" placeholder="Full name" aria-describedby="bk-name-error" class="mt-1.5 w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink outline-none placeholder:text-ink/35 focus:border-gold" />
+            <p id="bk-name-error" class="field-error invisible text-red-600" role="alert"></p>
+          </div>
+          <div>
+            <label for="bk-email" class="text-sm font-semibold text-forest">Email *</label>
+            <input id="bk-email" type="email" required placeholder="you@example.com" aria-describedby="bk-email-error" class="mt-1.5 w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink outline-none placeholder:text-ink/35 focus:border-gold" />
+            <p id="bk-email-error" class="field-error invisible text-red-600" role="alert"></p>
+          </div>
+        </div>
+        <div class="mt-4">
+          <label for="bk-notes" class="text-sm font-semibold text-forest">Event details — date, guest count, venue, budget (optional)</label>
+          <textarea id="bk-notes" rows="3" placeholder="e.g. Wedding, 14 Dec, ~300 guests, Taj Lands End Mumbai, budget around ₹2,250/guest…" class="mt-1.5 w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink outline-none placeholder:text-ink/35 focus:border-gold"></textarea>
+        </div>
+        <button type="submit" data-magnetic class="mt-5 w-full rounded-full bg-forest py-3.5 text-sm font-bold text-cream transition hover:bg-gold hover:text-forest sm:w-auto sm:px-8">Request My Quote →</button>
+        <p class="mt-3 text-xs text-ink/45">Demo form — no backend. Submitting opens your email app (mailto) with your event details prefilled. Nothing is sent until you press send. Note: the day picker above chooses your tasting-call day; tell us the actual event date in the details box.</p>
+      </form>
+    </div>
+  </section>
+</Layout>

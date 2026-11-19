@@ -1,0 +1,104 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Cloche from '../components/Cloche.astro';
+import PillarCards from '../components/PillarCards.astro';
+import StatsBar from '../components/StatsBar.astro';
+import ServicesSection from '../components/ServicesSection.astro';
+import MenuPreview from '../components/MenuPreview.astro';
+import GalleryPreview from '../components/GalleryPreview.astro';
+import Marquee from '../components/Marquee.astro';
+import ProcessPreview from '../components/ProcessPreview.astro';
+import Testimonials from '../components/Testimonials.astro';
+import PricingHint from '../components/PricingHint.astro';
+import BlogPreview from '../components/BlogPreview.astro';
+import FaqPreview from '../components/FaqPreview.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import { occasions, contact } from '../data/site';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FoodEstablishment',
+  name: 'Elevate Catering',
+  url: 'https://elevate-catering.pages.dev/',
+  description: 'Exquisite catering services — culinary excellence for corporate events, weddings & special occasions.',
+  email: 'hello@elevatecatering.in',
+  telephone: '+91 98765 43210',
+  priceRange: '₹₹',
+  foundingDate: '2014',
+  address: { '@type': 'PostalAddress', streetAddress: 'Bandra West', addressLocality: 'Mumbai', addressRegion: 'Maharashtra', addressCountry: 'IN' },
+  aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '612' },
+  image: 'https://elevate-catering.pages.dev/images/og-home.jpg',
+  logo: 'https://elevate-catering.pages.dev/favicon.svg',
+};
+const lead = 'Elevate Catering — culinary excellence for corporate events, weddings & special occasions. Customizable menus, fresh quality ingredients and elegant presentation, from ₹1,450 per guest.';
+---
+<Layout title="Elevate Catering — Exquisite Catering Services" description="Culinary excellence for corporate events, weddings & special occasions. Customizable menus, fresh ingredients, elegant presentation — Mumbai, Delhi & Bengaluru." jsonLd={jsonLd} lead={lead}>
+  <!-- HERO — exactly like the design: logo + headline left, hero salad bowl right on a sage blob -->
+  <section class="relative overflow-hidden bg-cream px-4 pb-10 pt-28 sm:px-6 sm:pt-36">
+    <div class="pointer-events-none absolute -right-32 -top-24 h-[480px] w-[480px] rounded-full bg-sage" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute -left-40 bottom-0 h-[320px] w-[320px] rounded-full bg-sage/70" aria-hidden="true"></div>
+    <div class="relative mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-2">
+      <div>
+        <div data-hero class="flex flex-col items-start">
+          <Cloche size={54} />
+          <p class="mt-2 font-display text-2xl font-bold tracking-[0.22em] text-forest">ELEVATE</p>
+          <p class="text-xs font-semibold tracking-[0.5em] text-gold-deep">CATERING</p>
+        </div>
+        <h1 data-split class="mt-8 font-display text-5xl font-bold leading-[1.05] tracking-tight text-forest sm:text-6xl">Exquisite Catering <span class="gold">Services</span></h1>
+        <p data-hero class="mt-5 max-w-md text-lg leading-relaxed text-ink/70">Culinary excellence for corporate events, weddings &amp; special occasions.</p>
+        <div data-hero class="mt-7 flex flex-wrap items-center gap-3">
+          <a href="/quote/" data-magnetic class="rounded-full bg-gold px-7 py-3.5 text-sm font-bold text-forest shadow-lg shadow-gold/30 transition hover:bg-forest hover:text-cream">Get a Quote</a>
+          <a href="/menus/" class="rounded-full border border-forest/25 px-6 py-3.5 text-sm font-semibold text-forest transition hover:border-gold hover:text-gold-deep">View Menus</a>
+        </div>
+        <p data-hero class="mt-5 flex items-center gap-2 text-sm text-ink/60"><span class="text-gold-deep" role="img" aria-label="Rated 4.9 out of 5 stars">★★★★★</span> 4.9 from 600+ events · FSSAI licensed · From ₹1,450/guest</p>
+      </div>
+      <div data-hero data-parallax class="relative">
+        <img src="/images/hero-salad.jpg" alt="Overhead caprese chicken salad bowl with cherry tomatoes, mozzarella, basil and a small bowl of green pesto" width="1200" height="1200" fetchpriority="high" class="relative z-10 mx-auto aspect-square w-full max-w-[540px] rounded-full object-cover shadow-2xl shadow-forest/20 ring-8 ring-white" />
+        <span class="absolute bottom-6 left-2 z-20 rounded-full bg-white/95 px-4 py-2 text-xs font-bold text-forest shadow sm:left-6">850+ events catered</span>
+        <span class="absolute right-2 top-8 z-20 rounded-full bg-forest px-4 py-2 text-xs font-bold text-cream shadow sm:right-6">Tastings available</span>
+      </div>
+    </div>
+  </section>
+
+  <PillarCards />
+
+  <!-- DELICIOUS OPTIONS — like the design -->
+  <section class="bg-cream px-4 py-12 sm:px-6" aria-labelledby="occasions-heading">
+    <div class="mx-auto max-w-6xl">
+      <h2 id="occasions-heading" class="reveal text-center font-display text-3xl font-bold text-forest sm:text-4xl">Delicious Options for <span class="gold">Every Occasion</span></h2>
+      <div class="mt-9 grid gap-5 sm:grid-cols-3">
+        {occasions.map((o) => (
+          <a href={o.href} class="reveal project-card group">
+            <span class="block overflow-hidden rounded-2xl">
+              <img src={o.img} alt={o.title} width="800" height="600" loading="lazy" class="aspect-[4/3] w-full object-cover" />
+            </span>
+            <h3 class="mt-4 font-display text-xl font-bold text-forest group-hover:text-gold-deep">{o.title}</h3>
+            <p class="mt-0.5 text-sm text-ink/55">{o.text}</p>
+          </a>
+        ))}
+      </div>
+      <div class="reveal mt-9 text-center">
+        <a href="/menus/" data-magnetic class="inline-block rounded-full bg-forest px-8 py-3.5 text-sm font-bold text-cream transition hover:bg-gold hover:text-forest">View Full Menu</a>
+      </div>
+    </div>
+  </section>
+
+  <StatsBar />
+  <ServicesSection />
+  <MenuPreview />
+  <Marquee items={['Weddings', 'Corporate Events', 'Private Parties', 'Galas']} />
+  <ProcessPreview />
+  <Testimonials />
+  <GalleryPreview />
+  <PricingHint />
+  <FaqPreview />
+  <BlogPreview />
+
+  <section class="bg-cream px-4 pb-4 sm:px-6" aria-label="Trust signals">
+    <div class="reveal mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-2 rounded-2xl bg-white px-6 py-4 text-center text-xs font-semibold text-ink/60 shadow-sm ring-1 ring-line">
+      <span>✓ FSSAI Licensed Kitchen</span><span>✓ Trained, Uniformed Staff</span><span>✓ Veg · Vegan · Jain · Gluten-Free</span><span>✓ {contact.hours}</span><span>✓ Mumbai · Delhi · Bengaluru</span>
+    </div>
+  </section>
+
+  <ContactCTA />
+</Layout>

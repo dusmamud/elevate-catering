@@ -1,0 +1,42 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ContactCTA from '../../components/ContactCTA.astro';
+import { menus, services } from '../../data/site';
+export function getStaticPaths() { return menus.map((m) => ({ params: { slug: m.slug }, props: { menu: m } })); }
+const { menu } = Astro.props;
+const description = `${menu.title} — ${menu.tagline} ${menu.price} ${menu.per} at Elevate Catering.`;
+const jsonLd = { '@context': 'https://schema.org', '@type': 'Menu', name: menu.title, description, url: `https://elevate-catering.pages.dev/menus/${menu.slug}/` };
+const lead = `${menu.tagline} ${menu.price} ${menu.per}.`;
+---
+<Layout title={`${menu.title} — Elevate Catering`} description={description} jsonLd={jsonLd} lead={lead}>
+  <PageHero eyebrow="Menu" title={menu.title} lead={lead} />
+  <section class="bg-cream px-4 pb-14 sm:px-6">
+    <div class="mx-auto max-w-6xl">
+      <img src={menu.img} alt={menu.title} width="1200" height="700" fetchpriority="high" class="reveal aspect-[16/9] w-full rounded-3xl object-cover" />
+      <div class="mt-10 grid gap-10 lg:grid-cols-[1.2fr_1fr]">
+        <div class="reveal space-y-8">
+          {menu.courses.map((c) => (
+            <div>
+              <h2 class="font-display text-2xl font-bold text-forest">{c.name}</h2>
+              <ul class="mt-3 grid gap-2 sm:grid-cols-2">{c.items.map((item) => (<li class="rounded-xl bg-white px-4 py-3 text-sm shadow-sm ring-1 ring-line">{item}</li>))}</ul>
+            </div>
+          ))}
+          <div>
+            <h2 class="font-display text-xl font-bold text-forest">Dietary care</h2>
+            <div class="mt-3 flex flex-wrap gap-1.5">{menu.dietary.map((d) => (<span class="rounded-full bg-sage px-3 py-1.5 text-xs font-bold text-forest">{d}</span>))}</div>
+            <p class="mt-3 text-sm leading-relaxed text-ink/65">Allergen dishes are prepared separately and labelled at service. Tell us your counts — veg, vegan, Jain, gluten-free — and we design each path properly.</p>
+          </div>
+        </div>
+        <aside class="reveal h-fit rounded-2xl bg-forest p-6 text-cream">
+          <p class="font-display text-3xl font-bold">{menu.price}<span class="text-base font-normal text-cream/65"> {menu.per}</span></p>
+          <p class="mt-1 text-sm text-cream/70">Starting price. Your fixed quote follows a free tasting — no hidden charges.</p>
+          <a href="/quote/" class="mt-5 block rounded-full bg-gold px-6 py-3 text-center text-sm font-bold text-forest transition hover:bg-cream">Get a Quote for This Menu →</a>
+          <a href="/menus/" class="mt-3 block rounded-full border border-white/30 px-6 py-3 text-center text-sm font-bold transition hover:bg-white/10">All menus →</a>
+          <p class="mt-4 text-xs text-cream/55">Pairs beautifully with: {services.slice(0, 3).map((s) => s.title).join(' · ')}</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+  <ContactCTA />
+</Layout>

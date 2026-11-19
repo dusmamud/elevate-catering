@@ -1,0 +1,32 @@
+---
+import { processSteps } from '../data/site';
+const preview = processSteps.slice(0, 5);
+---
+<section class="bg-cream px-4 py-14 sm:px-6" aria-labelledby="home-process-heading">
+  <div class="mx-auto max-w-6xl">
+    <div class="reveal flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <h2 id="home-process-heading" class="font-display text-3xl font-bold text-forest sm:text-4xl">From enquiry to event day in <span class="gold">6 steps</span></h2>
+        <p class="mt-2 max-w-xl text-sm leading-relaxed text-ink/60">Tasting first, transparent proposal, a captain on the floor — no mystery, no surprise bills.</p>
+      </div>
+      <a href="/process/" class="rounded-full border border-forest/25 px-4 py-2 text-sm font-semibold text-forest transition hover:border-gold hover:text-gold-deep">See how we work →</a>
+    </div>
+    <ol class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+      {preview.map((s, i) => (
+        <li class="reveal relative rounded-2xl bg-white p-5 shadow-sm ring-1 ring-line">
+          <div class="flex items-center justify-between">
+            <span class="grid h-10 w-10 place-items-center rounded-full bg-gold font-display text-sm font-bold text-forest" aria-hidden="true">{s.num}</span>
+            <span class="text-xs font-bold text-gold-deep">{s.weeks}</span>
+          </div>
+          <h3 class="mt-4 font-display text-lg font-bold text-forest">{s.title}</h3>
+          <p class="mt-1 text-sm leading-relaxed text-ink/60">{s.short}</p>
+          {i < preview.length - 1 && (<span class="absolute -right-3 top-1/2 hidden h-px w-6 bg-gold/60 lg:block" aria-hidden="true"></span>)}
+        </li>
+      ))}
+    </ol>
+    <div class="reveal mt-6 flex flex-wrap gap-3">
+      <a href="/process/" class="rounded-full bg-forest px-6 py-3 text-sm font-bold text-cream transition hover:bg-gold hover:text-forest">Our full process →</a>
+      <a href="/quote/" class="rounded-full border border-forest/25 px-6 py-3 text-sm font-semibold text-forest transition hover:border-gold hover:text-gold-deep">Get a quote</a>
+    </div>
+  </div>
+</section>

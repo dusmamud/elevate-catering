@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import { venues } from '../data/site';
+const lead = 'Partner venues we know kitchen-by-kitchen — plus your home, office or any venue you choose. We handle the venue coordination either way.';
+---
+<Layout title="Venues — Elevate Catering" description={lead} lead={lead}>
+  <PageHero eyebrow="Venues" title="Places we love to serve." lead={lead} />
+  <section class="bg-cream px-4 pb-14 sm:px-6">
+    <div class="mx-auto grid max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {venues.map((v) => (
+        <article class="reveal overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-line">
+          <img src={v.img} alt={v.name} width="800" height="520" loading="lazy" class="aspect-[3/2] w-full object-cover" />
+          <div class="p-5">
+            <p class="text-xs font-bold uppercase tracking-wider text-gold-deep">{v.city}</p>
+            <h2 class="mt-1 font-display text-xl font-bold text-forest">{v.name}</h2>
+            <p class="mt-1 text-sm text-ink/60">{v.style}</p>
+            <p class="mt-2 text-sm font-semibold text-forest">{v.capacity}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+    <p class="reveal mx-auto mt-8 max-w-3xl text-center text-sm text-ink/60">Venue not listed? We cater anywhere with a power point and a water connection — and we do a site recce before every first-time venue. <a href="/quote/" class="font-semibold text-gold-deep underline-offset-4 hover:underline">Ask about your venue →</a></p>
+  </section>
+  <ContactCTA />
+</Layout>

@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import { galleryItems } from '../data/site';
+const cats = ['All', ...new Set(galleryItems.map((g) => g.category))];
+const lead = 'Real plates from real events — labelled by occasion, so you can picture your own day. Filter by weddings, corporate, private parties or behind the scenes.';
+const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Elevate Catering Gallery', description: lead };
+---
+<Layout title="Gallery — Elevate Catering" description={lead} jsonLd={jsonLd} lead={lead}>
+  <PageHero eyebrow="Gallery" title="Served, styled, remembered." lead={lead} />
+  <section class="bg-cream px-4 pb-14 sm:px-6">
+    <div class="mx-auto max-w-6xl">
+      <div id="project-filter" class="reveal flex flex-wrap gap-2" role="group" aria-label="Filter gallery by event type">
+        {cats.map((c, i) => (<button type="button" data-filter={c} aria-pressed={i === 0 ? 'true' : 'false'} class:list={['rounded-full border px-4 py-2 text-sm font-semibold transition', i === 0 ? 'border-gold bg-gold text-forest' : 'border-line bg-white text-ink/70 hover:border-gold']}>{c}</button>))}
+      </div>
+      <p id="filter-count" class="mt-3 text-sm text-ink/55" role="status">Showing {galleryItems.length} of {galleryItems.length} projects</p>
+      <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {galleryItems.map((g) => (
+          <figure data-project-card data-category={g.category} class="reveal project-card group overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-line">
+            <img src={g.img} alt={g.title} width="800" height="560" loading="lazy" class="aspect-[10/7] w-full object-cover" />
+            <figcaption class="flex items-center justify-between p-4"><span class="font-display font-bold text-forest">{g.title}</span><span class="rounded-full bg-sage px-2.5 py-1 text-[11px] font-bold text-forest">{g.category}</span></figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+  <ContactCTA />
+</Layout>

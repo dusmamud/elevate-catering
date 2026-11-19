@@ -1,0 +1,68 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import { contact, services } from '../data/site';
+const lead = 'Tell us about your event. We reply within one working day. There is no backend on this form — submitting opens your mail app with everything prefilled, so nothing is lost.';
+const jsonLd = { '@context': 'https://schema.org', '@type': 'ContactPage', name: 'Contact Elevate Catering', description: lead, mainEntity: { '@type': 'Organization', name: 'Elevate Catering', url: 'https://elevate-catering.pages.dev/', email: contact.email, telephone: contact.phoneDisplay } };
+---
+<Layout title="Contact Us — Elevate Catering" description="Contact Elevate Catering: plan an event, ask a question, or book a tasting. We reply within one working day." jsonLd={jsonLd} lead={lead}>
+  <PageHero eyebrow="Contact Us" title="Let's plan something delicious." lead={lead} />
+  <section class="bg-cream px-4 pb-14 sm:px-6">
+    <div class="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1fr_360px]">
+      <form id="contact-form" class="reveal rounded-3xl bg-white p-6 shadow-sm ring-1 ring-line sm:p-8" novalidate>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div>
+            <label for="cf-name" class="text-sm font-semibold text-forest">Your name *</label>
+            <input id="cf-name" name="name" required minlength="2" placeholder="Full name" aria-describedby="cf-name-error" class="mt-1.5 w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink outline-none placeholder:text-ink/35 focus:border-gold" />
+            <p id="cf-name-error" class="field-error invisible text-red-600" role="alert"></p>
+          </div>
+          <div>
+            <label for="cf-email" class="text-sm font-semibold text-forest">Email *</label>
+            <input id="cf-email" name="email" type="email" required placeholder="you@example.com" aria-describedby="cf-email-error" class="mt-1.5 w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink outline-none placeholder:text-ink/35 focus:border-gold" />
+            <p id="cf-email-error" class="field-error invisible text-red-600" role="alert"></p>
+          </div>
+        </div>
+        <div class="mt-4">
+          <label for="cf-service" class="text-sm font-semibold text-forest">Event type</label>
+          <select id="cf-service" name="service" class="mt-1.5 w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink outline-none placeholder:text-ink/35 focus:border-gold">
+            <option value="">Not sure yet</option>
+            {services.map((s) => (<option value={s.title}>{s.title} — {s.price}</option>))}
+            <option value="Something else">Something else</option>
+          </select>
+        </div>
+        <div class="mt-4">
+          <label for="cf-budget" class="text-sm font-semibold text-forest">Budget per guest (optional)</label>
+          <select id="cf-budget" name="budget" class="mt-1.5 w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink outline-none placeholder:text-ink/35 focus:border-gold">
+            <option value="">Prefer not to say</option>
+            <option>Under ₹1,500 per guest</option>
+            <option>₹1,500 – ₹2,500 per guest</option>
+            <option>₹2,500 – ₹3,500 per guest</option>
+            <option>Above ₹3,500 per guest</option>
+          </select>
+        </div>
+        <div class="mt-4">
+          <label for="cf-message" class="text-sm font-semibold text-forest">Tell us about your event *</label>
+          <textarea id="cf-message" name="message" required minlength="10" rows="5" placeholder="Date, city, guest count, occasion — anything you know so far." aria-describedby="cf-message-error" class="mt-1.5 w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink outline-none placeholder:text-ink/35 focus:border-gold"></textarea>
+          <p id="cf-message-error" class="field-error invisible text-red-600" role="alert"></p>
+        </div>
+        <button type="submit" data-magnetic class="mt-5 w-full rounded-full bg-forest py-3.5 text-sm font-bold text-cream transition hover:bg-gold hover:text-forest sm:w-auto sm:px-8">Send Message →</button>
+        <p class="mt-3 text-xs text-ink/45">No backend yet — this form opens your email app (mailto) with the message prefilled. Your details never leave your device until you press send.</p>
+      </form>
+      <aside class="reveal space-y-4">
+        <div class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-line">
+          <h2 class="font-display text-lg font-bold text-forest">Reach us directly</h2>
+          <p class="mt-3 text-sm"><span class="text-ink/55">Email</span><br /><a class="font-semibold text-gold-deep underline-offset-4 hover:underline" href={`mailto:${contact.email}`}>{contact.email}</a></p>
+          <p class="mt-3 text-sm"><span class="text-ink/55">Phone</span><br /><a class="font-semibold text-forest" href={contact.phoneHref}>{contact.phoneDisplay}</a></p>
+          <p class="mt-3 text-sm"><span class="text-ink/55">Hours</span><br />{contact.hours}</p>
+          <p class="mt-3 text-sm"><span class="text-ink/55">Kitchen</span><br />{contact.location}</p>
+        </div>
+        <div class="rounded-3xl bg-forest p-6 text-cream">
+          <h2 class="font-display text-lg font-bold">Ready for a price?</h2>
+          <p class="mt-2 text-sm text-cream/75">Use the quote form — date, guests, venue and budget — and get a fixed per-person proposal after your tasting.</p>
+          <a href="/quote/" class="mt-4 block rounded-full bg-gold px-5 py-3 text-center text-sm font-bold text-forest">Get a Quote →</a>
+          <a href="/process/" class="mt-3 block text-center text-sm font-semibold underline underline-offset-4">What happens after you reach out?</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+const lead = 'How Elevate Catering handles your information on this demo website. Short version: this site has no backend, no accounts and no tracking cookies — forms open your own mail app.';
+---
+<Layout title="Privacy Policy — Elevate Catering" description={lead} lead={lead}>
+  <PageHero eyebrow="Legal" title="Privacy Policy" lead={lead} />
+  <section class="bg-cream px-4 pb-14 sm:px-6">
+    <div class="prose-elevate mx-auto max-w-3xl space-y-5 leading-relaxed text-ink/75">
+      <p><strong class="text-forest">Last updated:</strong> November 2026. This is a demo website with mock content; this policy describes the demo's actual behaviour.</p>
+      <h2 class="font-display text-2xl font-bold text-forest">What we collect</h2>
+      <p>This website collects nothing by itself. There are no accounts, no analytics cookies and no server-side forms. When you use a contact, quote or newsletter form, the details you type are placed into an email in your own mail app (mailto) or kept in your browser — nothing is sent until you press send in your mail app.</p>
+      <h2 class="font-display text-2xl font-bold text-forest">If you email us</h2>
+      <p>If you write to hello@elevatecatering.in, we receive your name, email address and whatever event details you share. We use them only to reply, prepare tastings and quotes, and run your event if you book. We do not sell personal data.</p>
+      <h2 class="font-display text-2xl font-bold text-forest">Your choices</h2>
+      <p>You can ask us to delete any email thread and the details in it at any time by writing to the same address. Because this demo stores nothing in a database, there is nothing else to delete.</p>
+    </div>
+  </section>
+</Layout>

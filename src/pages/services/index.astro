@@ -1,0 +1,30 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ServicesSection from '../../components/ServicesSection.astro';
+import ContactCTA from '../../components/ContactCTA.astro';
+import { services } from '../../data/site';
+const jsonLd = { '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: services.map((s, i) => ({ '@type': 'ListItem', position: i + 1, item: { '@type': 'Service', name: s.title, url: `https://elevate-catering.pages.dev/services/${s.slug}/`, description: s.short } })) };
+const lead = 'Six catering services — corporate events, weddings, private parties, galas, drop-off and full-service — each with a tasting first and a transparent per-person price.';
+---
+<Layout title="Our Services — Elevate Catering" description={lead} jsonLd={jsonLd} lead={lead}>
+  <PageHero eyebrow="What we do" title="Catering for every occasion." lead={lead} />
+  <ServicesSection />
+  <section class="bg-cream px-4 pb-14 sm:px-6">
+    <div class="mx-auto grid max-w-6xl gap-4 md:grid-cols-2">
+      {services.map((s) => (
+        <a href={`/services/${s.slug}/`} class="reveal group overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-line transition hover:ring-gold">
+          <img src={s.img} alt={s.title} width="900" height="560" loading="lazy" class="aspect-[16/10] w-full object-cover transition group-hover:scale-105" />
+          <div class="p-6">
+            <p class="font-display text-sm font-bold text-gold-deep">{s.num} · {s.price}</p>
+            <h2 class="mt-2 font-display text-2xl font-bold text-forest group-hover:text-gold-deep">{s.title}</h2>
+            <p class="mt-2 text-sm leading-relaxed text-ink/65">{s.short}</p>
+            <ul class="mt-4 space-y-1 text-sm text-ink/75">{s.points.map((p) => (<li>✓ {p}</li>))}</ul>
+            <span class="mt-4 inline-block text-sm font-semibold text-gold-deep">Learn more →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+  <ContactCTA />
+</Layout>

@@ -1,0 +1,37 @@
+---
+import { testimonials } from '../data/site';
+---
+<section id="reviews" data-spy="reviews" class="bg-cream px-4 py-14 sm:px-6" aria-labelledby="reviews-heading">
+  <div class="mx-auto max-w-6xl">
+    <div class="reveal flex items-end justify-between gap-4">
+      <div>
+        <h2 id="reviews-heading" class="font-display text-3xl font-bold text-forest sm:text-4xl">What hosts <span class="gold">say</span></h2>
+        <p class="mt-2 text-sm text-ink/60">4.9 average from 600+ events — words from couples, companies and hosts.</p>
+      </div>
+      <div class="flex gap-2">
+        <button id="testi-prev" type="button" aria-label="Previous review" class="grid h-11 w-11 place-items-center rounded-full border border-forest/25 text-forest transition hover:border-gold hover:text-gold-deep">←</button>
+        <button id="testi-next" type="button" aria-label="Next review" class="grid h-11 w-11 place-items-center rounded-full border border-forest/25 text-forest transition hover:border-gold hover:text-gold-deep">→</button>
+      </div>
+    </div>
+    <div id="testi-viewport" class="reveal mt-8 overflow-hidden rounded-3xl" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Client reviews — use left and right arrow keys to change review">
+      <div id="testi-track" class="testi-track flex">
+        {testimonials.map((t) => (
+          <figure data-slide class="w-full shrink-0 rounded-3xl bg-white p-8 shadow-sm ring-1 ring-line sm:p-10">
+            <span class="font-display text-5xl font-bold leading-none text-gold" aria-hidden="true">“</span>
+            <blockquote class="mt-2 max-w-3xl text-lg leading-relaxed text-ink/90 sm:text-xl">{t.quote}</blockquote>
+            <figcaption class="mt-6 flex items-center gap-3">
+              <img src={t.img} alt="" width="48" height="48" loading="lazy" class="h-12 w-12 rounded-full object-cover" />
+              <span><span class="block font-semibold text-forest">{t.name}</span><span class="block text-sm text-ink/55">{t.company}</span></span>
+              <span class="ml-auto text-gold-deep" role="img" aria-label="5 out of 5 stars">★★★★★</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+    <div class="mt-4 flex justify-center gap-2">
+      {testimonials.map((_, i) => (
+        <button type="button" data-dot aria-label={`Go to review ${i + 1}`} class:list={['h-2.5 w-2.5 rounded-full', i === 0 ? 'bg-gold' : 'bg-forest/20']} />
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Testimonials from '../components/Testimonials.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import { testimonials } from '../data/site';
+const lead = '4.9 out of 5 across 600+ events. Every review below is from a host — a couple, a company, a family — who ate what their guests ate.';
+const jsonLd = { '@context': 'https://schema.org', '@type': 'FoodEstablishment', name: 'Elevate Catering', aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '612' }, review: testimonials.map((t) => ({ '@type': 'Review', reviewBody: t.quote, author: { '@type': 'Person', name: t.name }, reviewRating: { '@type': 'Rating', ratingValue: '5' } })) };
+---
+<Layout title="Reviews — Elevate Catering" description={lead} jsonLd={jsonLd} lead={lead}>
+  <PageHero eyebrow="Reviews" title="Hosts who'd book us again." lead={lead} />
+  <Testimonials />
+  <section class="bg-cream px-4 pb-14 sm:px-6">
+    <div class="mx-auto grid max-w-6xl gap-4 md:grid-cols-2">
+      {testimonials.map((t) => (
+        <figure class="reveal rounded-2xl bg-white p-6 shadow-sm ring-1 ring-line">
+          <span class="text-gold-deep" role="img" aria-label="5 out of 5 stars">★★★★★</span>
+          <blockquote class="mt-2 leading-relaxed text-ink/85">{t.quote}</blockquote>
+          <figcaption class="mt-4 flex items-center gap-3"><img src={t.img} alt="" width="48" height="48" loading="lazy" class="h-12 w-12 rounded-full object-cover" /><span><span class="block font-semibold text-forest">{t.name}</span><span class="block text-sm text-ink/55">{t.company}</span></span></figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+  <ContactCTA />
+</Layout>

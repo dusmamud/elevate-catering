@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+const lead = 'The terms for using this demo website and for Elevate Catering bookings — written plainly, with the important numbers up front.';
+---
+<Layout title="Terms of Service — Elevate Catering" description={lead} lead={lead}>
+  <PageHero eyebrow="Legal" title="Terms of Service" lead={lead} />
+  <section class="bg-cream px-4 pb-14 sm:px-6">
+    <div class="mx-auto max-w-3xl space-y-5 leading-relaxed text-ink/75">
+      <p><strong class="text-forest">Last updated:</strong> November 2026. This is a demo website; all names, prices and stories are mock content for presentation.</p>
+      <h2 class="font-display text-2xl font-bold text-forest">Quotes & bookings</h2>
+      <p>Per-person prices shown (from ₹850 drop-off, ₹1,450 Essential, ₹2,250 Signature, ₹3,400 Royal) are starting prices. A booking is confirmed only when a written proposal is signed and the advance is paid. The signed proposal price is fixed — we do not add charges later.</p>
+      <h2 class="font-display text-2xl font-bold text-forest">Cancellation</h2>
+      <p>Full refund of the advance up to 30 days before the event, 50% up to 14 days. One free date change, subject to availability.</p>
+      <h2 class="font-display text-2xl font-bold text-forest">Food safety</h2>
+      <p>We operate under a valid FSSAI licence with trained food handlers. Allergen information is provided on request and labelled at service; guests with severe allergies should inform us at booking so we can plan separate preparation.</p>
+      <h2 class="font-display text-2xl font-bold text-forest">Website content</h2>
+      <p>Photos and text on this demo are illustrative. Menus change with the season; your proposal always reflects the menu agreed at your tasting.</p>
+    </div>
+  </section>
+</Layout>
