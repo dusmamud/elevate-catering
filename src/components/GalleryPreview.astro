@@ -1,5 +1,6 @@
 ---
 import { galleryItems } from '../data/site';
+import Picture from './Picture.astro';
 const preview = galleryItems.slice(0, 6);
 ---
 <section class="bg-cream px-4 py-14 sm:px-6" aria-labelledby="home-gallery-heading">
@@ -7,14 +8,14 @@ const preview = galleryItems.slice(0, 6);
     <div class="reveal flex flex-wrap items-end justify-between gap-4">
       <div>
         <h2 id="home-gallery-heading" class="font-display text-3xl font-bold text-forest sm:text-4xl">From recent <span class="gold">events</span></h2>
-        <p class="mt-2 max-w-xl text-sm leading-relaxed text-ink/60">Labelled by event type — weddings, corporate and private parties, as they were served.</p>
+        <p class="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">Labelled by event type — weddings, corporate and private parties, as they were served.</p>
       </div>
       <a href="/gallery/" class="rounded-full border border-forest/25 px-4 py-2 text-sm font-semibold text-forest transition hover:border-gold hover:text-gold-deep">Full gallery →</a>
     </div>
     <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {preview.map((g) => (
         <a href="/gallery/" class="reveal project-card group relative overflow-hidden rounded-2xl">
-          <img src={g.img} alt={g.title} width="640" height="420" loading="lazy" class="aspect-[3/2] w-full object-cover" />
+          <Picture src={g.img} alt={g.title} width="640" height="420" loading="lazy" class="aspect-[3/2] w-full object-cover" />
           <span class="absolute bottom-3 left-3 rounded-full bg-forest/85 px-3 py-1 text-xs font-semibold text-cream">{g.category} · {g.title}</span>
         </a>
       ))}

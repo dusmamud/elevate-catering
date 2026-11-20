@@ -1,0 +1,50 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import { areas, mumbaiAreas, site } from '../data/site';
+const lead = 'Based in Bandra West, Mumbai — catering across six cities and India\u2019s favourite destination-wedding locations. Here is where we work, and what changes by city.';
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'FoodEstablishment', name: 'Elevate Catering', url: site.url + '/',
+  email: 'hello@elevatecatering.in', telephone: '+91 98765 43210', priceRange: '₹₹',
+  address: { '@type': 'PostalAddress', streetAddress: 'Bandra West', addressLocality: 'Mumbai', addressRegion: 'Maharashtra', addressCountry: 'IN' },
+  areaServed: [...areas.map((a) => a.name), 'Jaipur', 'Udaipur', 'Lonavala'].map((name) => ({ '@type': 'City', name })),
+};
+---
+<Layout title="Service Areas — Elevate Catering" description={lead} jsonLd={jsonLd} lead={lead}>
+  <PageHero eyebrow="Service Areas" title="Where we cater." lead={lead} />
+  <section class="bg-cream px-4 pb-14 sm:px-6">
+    <div class="mx-auto max-w-6xl">
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {areas.map((a) => (
+          <article class="reveal rounded-3xl bg-white p-6 shadow-sm ring-1 ring-line">
+            <h2 class="font-display text-2xl font-bold text-forest">{a.name}</h2>
+            <p class="mt-2 text-sm leading-relaxed text-ink/70">{a.note}</p>
+            <p class="mt-4 flex flex-wrap gap-2">
+              <span class="rounded-full bg-sage px-3 py-1 text-xs font-bold text-forest">{a.min}</span>
+              <span class="rounded-full bg-sage px-3 py-1 text-xs font-bold text-forest">{a.travel}</span>
+            </p>
+          </article>
+        ))}
+      </div>
+
+      <div class="reveal mt-10 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-line sm:p-8">
+        <h2 class="font-display text-2xl font-bold text-forest">Mumbai neighbourhoods we serve weekly</h2>
+        <p class="mt-2 max-w-2xl text-sm leading-relaxed text-ink/70">From our Bandra West kitchen, these areas are inside our standard service radius — no travel fee, minimum 20 guests.</p>
+        <div class="mt-5 flex flex-wrap gap-2">
+          {mumbaiAreas.map((m) => (<span class="rounded-full border border-forest/25 px-4 py-2 text-sm font-semibold text-forest">{m}</span>))}
+        </div>
+      </div>
+
+      <div class="reveal mt-6 rounded-3xl bg-forest p-6 text-cream sm:p-8">
+        <h2 class="font-display text-2xl font-bold">Destination weddings</h2>
+        <p class="mt-2 max-w-3xl text-sm leading-relaxed text-cream/80">Goa, Jaipur, Udaipur, Lonavala and beyond: our destination team travels with the core kitchen, sources locally with partner farms, and does a venue recce before your date is confirmed. Minimum 80 guests; tastings happen in Mumbai or at the venue city.</p>
+        <div class="mt-5 flex flex-wrap gap-3">
+          <a href="/tastings/" class="rounded-full bg-gold px-6 py-3 text-sm font-bold text-forest transition hover:bg-cream">Book a Tasting</a>
+          <a href="/quote/" class="rounded-full border border-cream/40 px-6 py-3 text-sm font-semibold text-cream transition hover:border-gold hover:text-gold">Get a Quote</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <ContactCTA />
+</Layout>

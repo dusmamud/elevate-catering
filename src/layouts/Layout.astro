@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import MobileCTA from '../components/MobileCTA.astro';
 import { site } from '../data/site';
 
 interface Props {
@@ -84,6 +85,8 @@ const websiteLd = {
     <link rel="preload" href="/fonts/inter-500.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/inter-600.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
     <script type="application/ld+json" set:html={JSON.stringify(websiteLd)} />
     {crumbLd && <script type="application/ld+json" set:html={JSON.stringify(crumbLd)} />}
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
@@ -97,6 +100,7 @@ const websiteLd = {
       <slot />
     </main>
     <Footer />
+    <MobileCTA />
     <div id="scroll-progress" aria-hidden="true"></div>
     <div id="cursor-dot" aria-hidden="true"></div>
     <button id="back-to-top" type="button" aria-label="Back to top"><span aria-hidden="true">↑</span></button>

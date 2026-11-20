@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Picture from '../components/Picture.astro';
 import PageHero from '../components/PageHero.astro';
 import Testimonials from '../components/Testimonials.astro';
 import ContactCTA from '../components/ContactCTA.astro';
@@ -16,7 +17,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'FoodEstablishment',
         <figure class="reveal rounded-2xl bg-white p-6 shadow-sm ring-1 ring-line">
           <span class="text-gold-deep" role="img" aria-label="5 out of 5 stars">★★★★★</span>
           <blockquote class="mt-2 leading-relaxed text-ink/85">{t.quote}</blockquote>
-          <figcaption class="mt-4 flex items-center gap-3"><img src={t.img} alt="" width="48" height="48" loading="lazy" class="h-12 w-12 rounded-full object-cover" /><span><span class="block font-semibold text-forest">{t.name}</span><span class="block text-sm text-ink/55">{t.company}</span></span></figcaption>
+          <figcaption class="mt-4 flex items-center gap-3"><Picture src={t.img} alt="" width="48" height="48" loading="lazy" class="h-12 w-12 rounded-full object-cover" /><span><span class="block font-semibold text-forest">{t.name}</span><span class="block text-sm text-ink/70">{t.company}</span></span></figcaption>
         </figure>
       ))}
     </div>

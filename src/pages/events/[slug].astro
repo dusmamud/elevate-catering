@@ -1,0 +1,56 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Picture from '../../components/Picture.astro';
+import PageHero from '../../components/PageHero.astro';
+import ContactCTA from '../../components/ContactCTA.astro';
+import { featuredEvents } from '../../data/site';
+export function getStaticPaths() {
+  return featuredEvents.map((event) => ({ params: { slug: event.slug }, props: { event } }));
+}
+const { event } = Astro.props;
+const lead = `${event.title} at ${event.venue}, ${event.city} — ${event.guestsLabel}, ${event.dateLabel}. ${event.summary}`;
+const jsonLd = { '@context': 'https://schema.org', '@type': 'Article', headline: event.title, description: lead, image: `https://elevate-catering.pages.dev${event.img}`, author: { '@type': 'Organization', name: 'Elevate Catering' } };
+const others = featuredEvents.filter((e) => e.slug !== event.slug).slice(0, 3);
+---
+<Layout title={`${event.title} — Elevate Catering Events`} description={lead} jsonLd={jsonLd} lead={lead}>
+  <PageHero eyebrow={`${event.type} · ${event.dateLabel}`} title={event.title} lead={lead} />
+  <section class="bg-cream px-4 pb-14 sm:px-6">
+    <div class="mx-auto max-w-6xl">
+      <Picture src={event.img} alt={event.title} width={1200} height={700} fetchpriority="high" sizes="(max-width: 1152px) 100vw, 1152px" class="reveal aspect-[16/9] w-full rounded-3xl object-cover" />
+      <div class="mt-8 grid gap-10 lg:grid-cols-[1.5fr_1fr]">
+        <div class="reveal">
+          {event.body.map((para) => (<p class="mb-5 leading-relaxed text-ink/80">{para}</p>))}
+          <blockquote class="mt-8 rounded-3xl bg-forest p-6 text-cream sm:p-8">
+            <p class="font-display text-xl font-bold leading-relaxed">“{event.quote}”</p>
+            <cite class="mt-3 block text-sm not-italic text-cream/70">— {event.quoteBy}</cite>
+          </blockquote>
+        </div>
+        <aside class="reveal">
+          <div class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-line">
+            <h2 class="font-display text-xl font-bold text-forest">Event at a glance</h2>
+            <dl class="mt-4 space-y-3 text-sm">
+              <div class="flex justify-between gap-4"><dt class="font-semibold text-forest">Venue</dt><dd class="text-right text-ink/70">{event.venue}</dd></div>
+              <div class="flex justify-between gap-4"><dt class="font-semibold text-forest">City</dt><dd class="text-right text-ink/70">{event.city}</dd></div>
+              <div class="flex justify-between gap-4"><dt class="font-semibold text-forest">Guests</dt><dd class="text-right text-ink/70">{event.guestsLabel}</dd></div>
+              <div class="flex justify-between gap-4"><dt class="font-semibold text-forest">When</dt><dd class="text-right text-ink/70">{event.dateLabel}</dd></div>
+            </dl>
+            <h3 class="mt-6 font-display text-lg font-bold text-forest">Menu highlights</h3>
+            <ul class="mt-3 space-y-2 text-sm">{event.menuHighlights.map((m) => (<li class="flex gap-2"><span class="text-gold-deep">✓</span>{m}</li>))}</ul>
+            <h3 class="mt-6 font-display text-lg font-bold text-forest">Results</h3>
+            <ul class="mt-3 space-y-2 text-sm">{event.results.map((r) => (<li class="flex gap-2"><span class="text-gold-deep">★</span>{r}</li>))}</ul>
+            <a href="/quote/" class="mt-6 block rounded-full bg-gold px-6 py-3 text-center text-sm font-bold text-forest transition hover:bg-forest hover:text-cream">Plan an Event Like This →</a>
+            <a href="/tastings/" class="mt-3 block rounded-full border border-forest/25 px-6 py-3 text-center text-sm font-semibold text-forest transition hover:border-gold hover:text-gold-deep">Start with a Tasting</a>
+          </div>
+        </aside>
+      </div>
+      <div class="mt-12">
+        <h2 class="reveal font-display text-2xl font-bold text-forest">More featured events</h2>
+        <div class="mt-5 flex flex-wrap gap-2">
+          {others.map((e) => (<a href={`/events/${e.slug}/`} class="reveal rounded-full border border-forest/25 px-4 py-2 text-sm font-semibold text-forest transition hover:border-gold hover:text-gold-deep">{e.title} →</a>))}
+          <a href="/events/" class="reveal rounded-full bg-forest px-4 py-2 text-sm font-semibold text-cream transition hover:bg-gold hover:text-forest">All events →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <ContactCTA />
+</Layout>

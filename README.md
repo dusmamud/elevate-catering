@@ -6,10 +6,18 @@ Built with **Astro 7** + **Tailwind CSS 4** + **GSAP** + **Lenis**, Playfair Dis
 fonts self-hosted as woff2 files in `public/fonts` (no Google Fonts CDN). Static output,
 deploys to Cloudflare Pages. Forest green `#1e3d2f` + gold `#c0a062` + cream `#faf7f1`.
 
-34 routes total (32 in the sitemap): home, about, services (+ 6 detail pages),
-menus (+ 4 detail pages), gallery, pricing, process, team, venues, reviews,
-blog (+ 6 articles), FAQ, contact, quote, privacy, terms, search (noindex). 404
-and /search/ are excluded from the sitemap.
+44 routes total (42 in the sitemap): home, about, services (+ 6 detail pages),
+menus (+ 4 detail pages), gallery (with lightbox), pricing, process, team, venues,
+reviews, blog (+ 6 articles), FAQ, contact, quote, privacy, terms, search (noindex),
+plus tastings, featured events (+ 6 case studies), clients and service areas.
+404 and /search/ are excluded from the sitemap.
+
+Round 2: axe-clean contrast (deep bronze `#7d6234` for small gold text), responsive
+images via `scripts/convert-images.mjs` (AVIF/WebP/JPG @ 480/800/1200/1600) rendered
+by `src/components/Picture.astro` (falls back to the master JPG until variants are
+generated), sticky mobile Call/WhatsApp/Quote bar, floating WhatsApp button,
+PWA manifest, and a full audit script: `node scripts/audit.mjs` (axe + overflow + H1
+for every route, against a local preview).
 
 ## Develop
 

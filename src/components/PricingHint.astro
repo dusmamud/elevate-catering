@@ -7,7 +7,7 @@ const shown = pricingPlans;
     <div class="reveal flex flex-wrap items-end justify-between gap-4">
       <div>
         <h2 id="home-pricing-heading" class="font-display text-3xl font-bold text-forest sm:text-4xl">Transparent prices. <span class="gold">Per guest.</span></h2>
-        <p class="mt-2 max-w-xl text-sm leading-relaxed text-ink/60">Three packages, one fixed quote in writing before you book. The number you sign is the number you pay.</p>
+        <p class="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">Three packages, one fixed quote in writing before you book. The number you sign is the number you pay.</p>
       </div>
       <a href="/pricing/" class="rounded-full border border-forest/25 px-4 py-2 text-sm font-semibold text-forest transition hover:border-gold hover:text-gold-deep">All pricing →</a>
     </div>
@@ -16,11 +16,11 @@ const shown = pricingPlans;
         <article class:list={['reveal flex flex-col rounded-2xl p-6', p.popular ? 'bg-forest text-cream shadow-lg' : 'bg-white shadow-sm ring-1 ring-line']}>
           {p.popular && <p class="inline-block self-start rounded-full bg-gold px-3 py-1 text-[11px] font-black uppercase tracking-wider text-forest">Most popular</p>}
           <h3 class="mt-3 font-display text-xl font-bold">{p.name}</h3>
-          <p class:list={['mt-1 text-sm', p.popular ? 'text-cream/65' : 'text-ink/55']}>{p.bestFor}</p>
+          <p class:list={['mt-1 text-sm', p.popular ? 'text-cream/65' : 'text-ink/70']}>{p.bestFor}</p>
           <p class="mt-4 font-display text-3xl font-bold">{p.price}</p>
-          <p class:list={['text-xs', p.popular ? 'text-cream/55' : 'text-ink/45']}>{p.per} · {p.timeline}</p>
+          <p class:list={['text-xs', p.popular ? 'text-cream/70' : 'text-ink/70']}>{p.per} · {p.timeline}</p>
           <a href={`/quote/?plan=${p.slug}`} class:list={['mt-5 block rounded-full px-5 py-3 text-center text-sm font-bold transition', p.popular ? 'bg-gold text-forest hover:bg-cream' : 'bg-forest text-cream hover:bg-gold hover:text-forest']}>Get a quote →</a>
-          <a href="/pricing/" class:list={['mt-2 block text-center text-sm font-semibold underline-offset-4 hover:underline', p.popular ? 'text-cream/70' : 'text-ink/55']}>See what's included</a>
+          <a href="/pricing/" class:list={['mt-2 block text-center text-sm font-semibold underline-offset-4 hover:underline', p.popular ? 'text-cream/70' : 'text-ink/70']}>See what's included</a>
         </article>
       ))}
     </div>

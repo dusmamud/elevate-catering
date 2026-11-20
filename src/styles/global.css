@@ -6,7 +6,7 @@
   --color-forest: #1e3d2f;
   --color-forest-2: #234338;
   --color-gold: #c0a062;
-  --color-gold-deep: #b9975b;
+  --color-gold-deep: #7d6234;
   --color-cream: #faf7f1;
   --color-sage: #e9efe9;
   --color-ink: #1c2420;
@@ -26,7 +26,10 @@ html, body { overflow-x: clip; }
 body { background: #faf7f1; color: #1c2420; font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 ::selection { background: #c0a062; color: #1e3d2f; }
 .font-display { font-family: var(--font-display); }
-.gold { color: #b9975b; }
+/* Large display gold — deepened from #b9975b to pass 3:1 on cream (3.7:1) */
+.gold { color: #9a7b3f; }
+/* Responsive Picture component: wrapper disappears so the <img> keeps its layout classes */
+.pic-wrap { display: contents; }
 
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .marquee-track { animation: marquee 22s linear infinite; }
@@ -45,7 +48,7 @@ body { background: #faf7f1; color: #1c2420; font-family: var(--font-sans); -webk
 .reveal { opacity: 1; transform: none; }
 .testi-track { transition: transform 0.5s ease; }
 
-:focus-visible { outline: 2px solid #b9975b; outline-offset: 2px; border-radius: 4px; }
+:focus-visible { outline: 2px solid #7d6234; outline-offset: 2px; border-radius: 4px; }
 footer :focus-visible { outline-color: #c0a062; }
 
 #scroll-progress { position: fixed; top: 0; left: 0; z-index: 80; height: 3px; width: 100%; background: #c0a062; transform-origin: 0 50%; transform: scaleX(0); pointer-events: none; }
@@ -83,9 +86,18 @@ footer :focus-visible { outline-color: #c0a062; }
 input[aria-invalid="true"], textarea[aria-invalid="true"], select[aria-invalid="true"] { border-color: #dc2626 !important; }
 [data-magnetic] { will-change: transform; }
 
+/* Gallery lightbox (native <dialog>) */
+#lightbox { border: none; padding: 0; background: transparent; max-width: min(92vw, 64rem); width: 100%; }
+#lightbox::backdrop { background: rgba(30, 61, 47, 0.88); }
+#lightbox[open] .lb-frame { animation: lb-in 0.28s ease; }
+@keyframes lb-in { from { opacity: 0; transform: scale(0.97) translateY(8px); } to { opacity: 1; transform: none; } }
+.lb-btn { display: grid; place-items: center; height: 2.75rem; width: 2.75rem; border-radius: 9999px; background: rgba(250, 247, 241, 0.95); color: #1e3d2f; font-weight: 800; box-shadow: 0 8px 24px rgba(0,0,0,0.3); transition: background-color 0.2s ease, transform 0.2s ease; }
+.lb-btn:hover { background: #c0a062; }
+
 @media (prefers-reduced-motion: reduce) {
   #site-header, #back-to-top, #toast, .faq-panel, .faq-icon,
   .project-card img, .card-arrow, #cursor-dot { transition: none !important; }
   #cursor-dot { display: none; }
   .marquee-track, .marquee-track-slow { animation: none !important; }
+  #lightbox[open] .lb-frame { animation: none; }
 }

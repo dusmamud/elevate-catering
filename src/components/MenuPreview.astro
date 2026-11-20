@@ -1,23 +1,24 @@
 ---
 import { menus } from '../data/site';
+import Picture from './Picture.astro';
 ---
 <section class="bg-sage/60 px-4 py-14 sm:px-6" aria-labelledby="home-menus-heading">
   <div class="mx-auto max-w-6xl">
     <div class="reveal flex flex-wrap items-end justify-between gap-4">
       <div>
         <h2 id="home-menus-heading" class="font-display text-3xl font-bold text-forest sm:text-4xl">Menus for <span class="gold">every occasion</span></h2>
-        <p class="mt-2 max-w-xl text-sm leading-relaxed text-ink/60">Full HTML menus — never a PDF. Courses, dietary tags and per-person prices, up front.</p>
+        <p class="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">Full HTML menus — never a PDF. Courses, dietary tags and per-person prices, up front.</p>
       </div>
       <a href="/menus/" class="rounded-full bg-forest px-5 py-2.5 text-sm font-semibold text-cream transition hover:bg-gold hover:text-forest">View Full Menu</a>
     </div>
     <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {menus.map((m) => (
         <a href={`/menus/${m.slug}/`} class="reveal project-card group overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-line">
-          <img src={m.img} alt={m.title} width="640" height="420" loading="lazy" class="aspect-[3/2] w-full object-cover" />
+          <Picture src={m.img} alt={m.title} width="640" height="420" loading="lazy" class="aspect-[3/2] w-full object-cover" />
           <div class="p-5">
-            <p class="font-display text-2xl font-bold text-forest">{m.price}<span class="text-sm font-normal text-ink/55"> {m.per}</span></p>
+            <p class="font-display text-2xl font-bold text-forest">{m.price}<span class="text-sm font-normal text-ink/70"> {m.per}</span></p>
             <h3 class="mt-1 font-display text-lg font-bold text-forest group-hover:text-gold-deep">{m.title}</h3>
-            <p class="mt-1 text-sm text-ink/60">{m.tagline}</p>
+            <p class="mt-1 text-sm text-ink/70">{m.tagline}</p>
             <span class="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-gold-deep">See menu <span class="card-arrow" aria-hidden="true">→</span></span>
           </div>
         </a>

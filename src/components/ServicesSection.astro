@@ -1,5 +1,6 @@
 ---
 import { services } from '../data/site';
+import Picture from './Picture.astro';
 ---
 <section id="services" data-spy="services" class="bg-cream px-4 py-14 sm:px-6" aria-labelledby="services-heading">
   <div class="reveal relative mx-auto max-w-6xl rounded-3xl bg-white px-5 py-10 shadow-sm ring-1 ring-line sm:px-10">
@@ -21,7 +22,7 @@ import { services } from '../data/site';
       </div>
       <div class="grid gap-4 sm:grid-cols-[1.2fr_1fr]">
         <div class="relative overflow-hidden rounded-2xl">
-          <img src="/images/chef-plating.jpg" alt="An Elevate chef plating a signature dish" width="1000" height="667" loading="lazy" data-parallax-img class="h-full min-h-[280px] w-full scale-[1.08] object-cover" />
+          <Picture src="/images/chef-plating.jpg" alt="An Elevate chef plating a signature dish" width="1000" height="667" loading="lazy" data-parallax-img class="h-full min-h-[280px] w-full scale-[1.08] object-cover" />
           <span class="absolute bottom-3 left-3 rounded-full bg-forest/85 px-3 py-1 text-xs font-semibold text-cream">Inside our kitchen</span>
         </div>
         <div class="flex flex-col gap-4">

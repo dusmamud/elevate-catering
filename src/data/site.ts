@@ -285,3 +285,106 @@ export const blogPosts = [
     ],
   },
 ];
+
+// ---- Round 2 additions (mock) ----
+
+export const whatsappHref = 'https://wa.me/919876543210?text=' + encodeURIComponent('Hi Elevate Catering! I would like to enquire about catering for my event.');
+
+export const tastingFormats = [
+  { slug: 'essential-tasting', name: 'Essential Tasting', price: '₹999', forLabel: 'for 2 guests', dishes: '6 dishes', text: 'A focused tasting of your shortlisted starters, mains and one dessert — at our Bandra kitchen or your office.', includes: ['6 shortlisted dishes', 'Menu designer consultation', 'Dietary-path samples (veg / Jain / vegan)', 'Fully adjusted against your booking'] },
+  { slug: 'signature-tasting', name: 'Signature Tasting', price: '₹1,999', forLabel: 'for 4 guests', dishes: '10 dishes', text: 'The wedding favourite: the full arc of your celebration menu, welcome drink to dessert, with both families at the table.', includes: ['10 dishes across all courses', 'Welcome drink & live-counter demo', 'Cake flavour tasting', 'Fully adjusted against your booking'], popular: true },
+  { slug: 'chefs-table', name: "Chef's Table Tasting", price: '₹4,999', forLabel: 'for 6 guests', dishes: '7 courses', text: 'A private seven-course evening with Chef Arjun — the seasonal tasting menu, plated and paced like your event day.', includes: ['7 chef-led courses', 'Wine & mocktail pairings', 'Printed menu draft to take home', '₹2,500 adjusted against your booking'] },
+];
+
+export const tastingFaqs = [
+  { q: 'Is the tasting fee really adjusted?', a: 'Yes — Essential and Signature tasting fees are fully adjusted against your confirmed booking, and ₹2,500 of the Chef\u2019s Table fee is adjusted. If you do not book, you have still had a very good meal.' },
+  { q: 'Can we taste our dietary menus too?', a: 'Always. Tell us the Jain, vegan or gluten-free counts when you book the tasting and those paths are plated alongside the main shortlist — designed dishes, not afterthoughts.' },
+  { q: 'Where do tastings happen?', a: 'At our Bandra West kitchen studio, Mon–Sat 10am–7pm. Signature and Chef\u2019s Table tastings can travel to your home or office within Mumbai for a small setup fee.' },
+];
+
+export const featuredEvents = [
+  {
+    slug: 'seaside-wedding-mumbai', type: 'Weddings', title: 'Seaside Wedding for 800', venue: 'Taj Lands End', city: 'Mumbai', guests: 800, guestsLabel: '800 guests', dateLabel: 'December 2026',
+    img: '/images/tablescape.jpg', summary: 'Three days, five functions, one kitchen — sangeet street-food counters to a plated reception dinner by the sea.',
+    menuHighlights: ['Live chaat & tandoor counters', 'Plated continental course', 'Midnight kulfi & snack bar', 'Jain & vegan parallel menus'],
+    quote: 'Guests are still talking about the live counters. The tasting convinced us — the event days were flawless.', quoteBy: 'Ananya & Vikram Shah, the couple',
+    results: ['5 functions over 3 days', '42 dishes, zero queue over 6 minutes', '180 dietary guests served in the main spread'],
+    body: [
+      'An 800-guest Mumbai wedding is a logistics operation disguised as a celebration. We ran five functions across three days — haldi brunch, sangeet, wedding lunch, reception and a midnight after-party — from one production kitchen with a satellite finishing station at the venue.',
+      'The menu was built around anchors the family loved: a chaat counter modelled on the bride\u2019s favourite Delhi street, the groom\u2019s grandmother\u2019s dal, and a plated continental course for the reception. Jain and vegan paths were designed as parallel menus and served inside the main spread, labelled and staffed.',
+      'An event captain per function, a six-minute maximum queue standard at counters, and a midnight kulfi bar when the dancing peaked — the family hosted; we ran the floor.',
+    ],
+  },
+  {
+    slug: 'tech-gala-bkc', type: 'Corporate', title: 'Tech Client Gala for 500', venue: 'Jio World Centre, BKC', city: 'Mumbai', guests: 500, guestsLabel: '500 guests', dateLabel: 'November 2026',
+    img: '/images/buffet-spread.jpg', summary: 'A black-tie client gala with quiet, precise service — canapé reception, plated mains and a branded dessert wall.',
+    menuHighlights: ['Champagne & canapé reception', '3-course plated dinner', 'Branded dessert wall', 'Sommelier-paired courses'],
+    quote: 'Our CEO asked for their number before dessert. Quiet, perfect service — and food that matched the room.', quoteBy: 'Kavita Deshmukh, Head of Marketing',
+    results: ['500 plated covers in 38 minutes', '9 dietary tables served course-synced', 'Branded dessert wall in brand colours'],
+    body: [
+      'A client gala lives or dies on timing: courses must land between speeches, service must be invisible, and the food has to photograph as well as it tastes. We served a canapé reception on arrival, then a three-course plated dinner for 500.',
+      'Nine tables had dietary requirements; their courses were plated in parallel and served in the same pass, so no guest waited or felt singled out. The finale was a dessert wall built in the client\u2019s brand colours — the most photographed corner of the night.',
+    ],
+  },
+  {
+    slug: 'product-launch-andheri', type: 'Corporate', title: 'Product Launch for 300', venue: 'Studio Space, Andheri', city: 'Mumbai', guests: 300, guestsLabel: '300 guests', dateLabel: 'October 2026',
+    img: '/images/corporate-shrimp.jpg', summary: 'A gadget launch with roaming small plates, two live stations and a dessert that matched the product\u2019s colours.',
+    menuHighlights: ['Roaming canapés & small plates', '2 live stations', 'Colour-matched desserts', 'Zero-waste service plan'],
+    quote: 'The food moved like the product demo — fast, beautiful, no queues. Our launch trended; the dessert wall helped.', quoteBy: 'Arjun Bhosale, Brand Lead',
+    results: ['300 guests, no fixed seating', '2 live stations, 90-second average serve', '94% food consumed — minimal waste'],
+    body: [
+      'For a product launch, guests should never stand in a buffet line while the demo plays. We designed roaming service: staff circulating with small plates, two live stations at the room\u2019s edges, and drinks that could be held in one hand.',
+      'The dessert station echoed the product\u2019s launch colours, and a consumption-tracked service plan kept waste under 6% — the client\u2019s sustainability team put that number in their own report.',
+    ],
+  },
+  {
+    slug: 'terrace-birthday-juhu', type: 'Private Parties', title: '70th Birthday on a Terrace', venue: 'Private Residence, Juhu', city: 'Mumbai', guests: 60, guestsLabel: '60 guests', dateLabel: 'September 2026',
+    img: '/images/private-charcuterie.jpg', summary: 'A family terrace turned into a grazing restaurant — charcuterie boards, small plates and a very happy host.',
+    menuHighlights: ['Charcuterie & cheese boards', 'Hot small plates', 'Mocktail pairings', 'Kids\u2019 corner menu'],
+    quote: 'They turned our terrace into a restaurant. We actually got to enjoy our own party.', quoteBy: 'Rahul Malhotra, host',
+    results: ['Home setup in 90 minutes', 'Full cleanup included', 'Host sat down for 3 full hours'],
+    body: [
+      'The brief was simple: the host had cooked at every family party for forty years and was not allowed to this time. We set a grazing table on the terrace — charcuterie, cheese, hot small plates on rotation — with a small kids\u2019 corner and mocktail pairings.',
+      'Setup took ninety minutes in a home kitchen, service was one quiet team of three, and cleanup left the terrace exactly as we found it. The host\u2019s review said the rest.',
+    ],
+  },
+  {
+    slug: 'charity-fundraiser-delhi', type: 'Fundraisers', title: 'Charity Fundraiser for 350', venue: 'ITC Grand Bharat', city: 'Delhi NCR', guests: 350, guestsLabel: '350 guests', dateLabel: 'August 2026',
+    img: '/images/wedding-canapes.jpg', summary: 'An auction-night fundraiser: canapé reception, plated dinner and a donor dessert auction that raised the roof.',
+    menuHighlights: ['Canapé & champagne reception', 'Plated 3-course dinner', 'Donor dessert auction', 'Printed menu cards'],
+    quote: 'The dessert auction alone raised more than our last two galas combined. Impeccable partners.', quoteBy: 'Foundation Director, Delhi',
+    results: ['₹18 lakh raised on the night', 'Dessert auction: 12 lots, all sold', '350 covers, silent service'],
+    body: [
+      'Fundraisers ask catering to do double duty: feed people beautifully and help them give generously. We paced a canapé reception around the silent auction, served a plated dinner between speeches, and finished with theatre — a live dessert auction of twelve signature cakes and hampers.',
+      'Printed menu cards carried the foundation\u2019s story at every place setting. The night raised ₹18 lakh; the dessert auction outsold the previous two galas combined.',
+    ],
+  },
+  {
+    slug: 'golden-anniversary-goa', type: 'Private Parties', title: 'Golden Anniversary in Goa', venue: 'Alila Diwa', city: 'Goa', guests: 120, guestsLabel: '120 guests', dateLabel: 'February 2026',
+    img: '/images/wedding-cake.jpg', summary: 'Fifty years, four generations, one long Goan table — family recipes honoured, destination logistics handled.',
+    menuHighlights: ['Family-recipe specials', 'Goan & continental spread', 'Anniversary cake ceremony', 'Beachside brunch next day'],
+    quote: 'They cooked my mother\u2019s recipes with her, not just for her. There was not a dry eye at the table.', quoteBy: 'The Fernandes Family',
+    results: ['4 generations at one table', '3 family recipes recreated', '2 days of celebrations'],
+    body: [
+      'For a 50th anniversary in Goa, the menu had to carry memory: the couple\u2019s wedding dishes, recreated with the family\u2019s own recipes, alongside a Goan-continental spread for 120 guests across four generations.',
+      'Our destination team handled venue coordination, local sourcing and a beachside brunch the next morning. The anniversary cake ceremony closed an evening that felt less catered than hosted by family — which was precisely the brief.',
+    ],
+  },
+];
+
+export const clients = [
+  'FinEdge Technologies', 'UrbanNest Realty', 'MedCore Hospitals', 'BrightLearn EdTech',
+  'Zenith Motors', 'Aarogya Insurance', 'PixelWorks Media', 'GreenGrid Energy',
+  'Casa Living', 'Orbit Retail Group', 'Skyline Developers', 'Nivaara Hotels',
+];
+
+export const areas = [
+  { name: 'Mumbai', note: 'Our home city — kitchen studio in Bandra West. No travel fee.', min: 'Min. 20 guests', travel: 'No travel fee' },
+  { name: 'Delhi NCR', note: 'Full travelling team with local finishing kitchen partners.', min: 'Min. 100 guests', travel: 'Travel team' },
+  { name: 'Bengaluru', note: 'Regular corporate & wedding calendar, local staff network.', min: 'Min. 100 guests', travel: 'Travel team' },
+  { name: 'Hyderabad', note: 'Weddings & corporate events across the city and Ramoji area.', min: 'Min. 100 guests', travel: 'Travel team' },
+  { name: 'Pune', note: 'Weekend weddings & private parties, same kitchen quality.', min: 'Min. 50 guests', travel: 'Same-day team' },
+  { name: 'Goa', note: 'Destination weddings & celebrations, beachside to heritage villas.', min: 'Min. 80 guests', travel: 'Destination team' },
+];
+
+export const mumbaiAreas = ['Bandra West', 'Juhu', 'Andheri', 'Powai', 'BKC', 'Worli', 'Colaba', 'Malabar Hill', 'Thane', 'Navi Mumbai', 'Chembur', 'Borivali'];

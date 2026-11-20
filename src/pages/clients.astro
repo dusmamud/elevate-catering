@@ -1,0 +1,50 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import StatsBar from '../components/StatsBar.astro';
+import Marquee from '../components/Marquee.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import { clients, venues } from '../data/site';
+const lead = 'Companies, venues and planners who trust Elevate with their biggest rooms — plus how to partner with us for yours.';
+const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Our Clients — Elevate Catering', description: lead };
+---
+<Layout title="Our Clients — Elevate Catering" description={lead} jsonLd={jsonLd} lead={lead}>
+  <PageHero eyebrow="Our Clients" title="Trusted in big rooms." lead={lead} />
+  <section class="bg-cream px-4 pb-6 sm:px-6">
+    <div class="mx-auto max-w-6xl">
+      <p class="reveal text-xs font-bold uppercase tracking-[0.25em] text-gold-deep">Corporate clients (mock)</p>
+      <div class="mt-4 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
+        {clients.map((c) => (
+          <div class="reveal grid min-h-[92px] place-items-center rounded-2xl bg-white px-4 py-5 text-center shadow-sm ring-1 ring-line">
+            <span class="font-display text-lg font-bold leading-tight tracking-wide text-forest">{c}</span>
+          </div>
+        ))}
+      </div>
+      <p class="reveal mt-4 text-sm text-ink/70">Weekly drop-off lunches, boardroom dining, client galas and launch events — most of these relationships started with a single tasting.</p>
+    </div>
+  </section>
+  <StatsBar />
+  <Marquee dark items={clients.slice(0, 6)} />
+  <section class="bg-cream px-4 py-14 sm:px-6">
+    <div class="mx-auto max-w-6xl">
+      <h2 class="reveal font-display text-3xl font-bold text-forest">Partner <span class="gold">venues</span></h2>
+      <p class="reveal mt-2 max-w-2xl text-sm leading-relaxed text-ink/70">We are on the preferred-caterer list at venues across Mumbai, Delhi, Bengaluru and Goa — which means faster load-ins, known kitchens and captains who know the floor.</p>
+      <div class="mt-6 flex flex-wrap gap-2">
+        {venues.map((v) => (<a href="/venues/" class="reveal rounded-full border border-forest/25 px-4 py-2 text-sm font-semibold text-forest transition hover:border-gold hover:text-gold-deep">{v.name} · {v.city} →</a>))}
+      </div>
+      <div class="mt-10 grid gap-5 md:grid-cols-2">
+        <article class="reveal rounded-3xl bg-forest p-7 text-cream">
+          <h3 class="font-display text-2xl font-bold">For venues</h3>
+          <p class="mt-2 text-sm leading-relaxed text-cream/80">Join our partner list: a caterer who protects your floor, your timelines and your reputation — with FSSAI paperwork and insurance shared up front, every time.</p>
+          <a href="/contact/" class="mt-5 inline-block rounded-full bg-gold px-6 py-3 text-sm font-bold text-forest transition hover:bg-cream">Partner with us →</a>
+        </article>
+        <article class="reveal rounded-3xl bg-white p-7 shadow-sm ring-1 ring-line">
+          <h3 class="font-display text-2xl font-bold text-forest">For planners</h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink/70">One captain, one proposal, zero chasing. Planners get a dedicated line, menu drafts within 48 hours and a tasting for their clients on priority slots.</p>
+          <a href="/contact/" class="mt-5 inline-block rounded-full bg-forest px-6 py-3 text-sm font-bold text-cream transition hover:bg-gold hover:text-forest">Talk to our events team →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+  <ContactCTA />
+</Layout>

@@ -36,13 +36,13 @@ const lead = 'Search every page, service, menu, venue and article on the Elevate
         <input id="search-input" type="search" placeholder="Try “wedding”, “pricing”, “Jain”, “venues”…" autocomplete="off" class="w-full min-w-0 bg-transparent px-5 py-3.5 text-sm text-ink outline-none placeholder:text-ink/40" />
         <button type="submit" class="shrink-0 bg-forest px-5 text-sm font-semibold text-cream transition hover:bg-gold hover:text-forest">Search</button>
       </form>
-      <p id="search-count" class="mt-4 text-sm text-ink/55" role="status"></p>
+      <p id="search-count" class="mt-4 text-sm text-ink/70" role="status"></p>
       <div id="search-results" class="mt-4 space-y-3">
         {entries.map((e) => (
           <a href={e.href} data-title={e.title.toLowerCase()} data-text={e.text.toLowerCase()} class="search-item reveal block rounded-2xl bg-white p-5 shadow-sm ring-1 ring-line transition hover:ring-gold">
             <span class="rounded-full bg-sage px-3 py-1 text-[11px] font-black uppercase tracking-wider text-forest">{e.kind}</span>
             <h2 class="mt-2 font-display text-lg font-bold text-forest">{e.title}</h2>
-            <p class="mt-1 text-sm text-ink/60">{e.text.slice(0, 140)}{e.text.length > 140 ? '…' : ''}</p>
+            <p class="mt-1 text-sm text-ink/70">{e.text.slice(0, 140)}{e.text.length > 140 ? '…' : ''}</p>
           </a>
         ))}
       </div>

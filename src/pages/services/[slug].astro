@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Picture from '../../components/Picture.astro';
 import PageHero from '../../components/PageHero.astro';
 import ContactCTA from '../../components/ContactCTA.astro';
 import { services, menus } from '../../data/site';
@@ -13,7 +14,7 @@ const lead = `${service.title} — ${service.short} Starting ${service.price.toL
   <PageHero eyebrow={`Service ${service.num}`} title={service.title} lead={lead} />
   <section class="bg-cream px-4 pb-14 sm:px-6">
     <div class="mx-auto max-w-6xl">
-      <img src={service.img} alt={service.title} width="1200" height="700" fetchpriority="high" class="reveal aspect-[16/9] w-full rounded-3xl object-cover" />
+      <Picture src={service.img} alt={service.title} width="1200" height="700" fetchpriority="high" sizes="(max-width: 1152px) 100vw, 1152px" class="reveal aspect-[16/9] w-full rounded-3xl object-cover" />
       <div class="mt-10 grid gap-10 lg:grid-cols-[1.2fr_1fr]">
         <div class="reveal">
           <h2 class="font-display text-2xl font-bold text-forest">What's on the table</h2>

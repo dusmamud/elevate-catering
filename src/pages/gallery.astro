@@ -1,11 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Picture from '../components/Picture.astro';
 import PageHero from '../components/PageHero.astro';
 import ContactCTA from '../components/ContactCTA.astro';
 import { galleryItems } from '../data/site';
 const cats = ['All', ...new Set(galleryItems.map((g) => g.category))];
-const lead = 'Real plates from real events — labelled by occasion, so you can picture your own day. Filter by weddings, corporate, private parties or behind the scenes.';
+const lead = 'Real plates from real events — labelled by occasion, so you can picture your own day. Filter by weddings, corporate, private parties or behind the scenes. Tap any photo to view it larger.';
 const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Elevate Catering Gallery', description: lead };
+const stem = (src: string) => src.replace(/\.jpe?g$/i, '');
 ---
 <Layout title="Gallery — Elevate Catering" description={lead} jsonLd={jsonLd} lead={lead}>
   <PageHero eyebrow="Gallery" title="Served, styled, remembered." lead={lead} />
@@ -14,16 +16,29 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', na
       <div id="project-filter" class="reveal flex flex-wrap gap-2" role="group" aria-label="Filter gallery by event type">
         {cats.map((c, i) => (<button type="button" data-filter={c} aria-pressed={i === 0 ? 'true' : 'false'} class:list={['rounded-full border px-4 py-2 text-sm font-semibold transition', i === 0 ? 'border-gold bg-gold text-forest' : 'border-line bg-white text-ink/70 hover:border-gold']}>{c}</button>))}
       </div>
-      <p id="filter-count" class="mt-3 text-sm text-ink/55" role="status">Showing {galleryItems.length} of {galleryItems.length} projects</p>
+      <p id="filter-count" class="mt-3 text-sm text-ink/70" role="status">Showing {galleryItems.length} of {galleryItems.length} projects</p>
       <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {galleryItems.map((g) => (
           <figure data-project-card data-category={g.category} class="reveal project-card group overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-line">
-            <img src={g.img} alt={g.title} width="800" height="560" loading="lazy" class="aspect-[10/7] w-full object-cover" />
+            <button type="button" data-lightbox data-full={`${stem(g.img)}-1200.jpg`} data-caption={`${g.title} — ${g.category}`} aria-label={`View larger photo: ${g.title}`} class="block w-full cursor-zoom-in">
+              <Picture src={g.img} alt={g.title} width={800} height={560} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" class="aspect-[10/7] w-full object-cover" />
+            </button>
             <figcaption class="flex items-center justify-between p-4"><span class="font-display font-bold text-forest">{g.title}</span><span class="rounded-full bg-sage px-2.5 py-1 text-[11px] font-bold text-forest">{g.category}</span></figcaption>
           </figure>
         ))}
       </div>
     </div>
   </section>
+
+  <dialog id="lightbox" aria-label="Photo viewer">
+    <div class="lb-frame relative">
+      <img id="lb-img" src="" alt="" width="1200" height="840" class="max-h-[78vh] w-full rounded-3xl object-contain" />
+      <p id="lb-cap" class="mt-3 text-center font-display text-lg font-bold text-cream"></p>
+      <button type="button" id="lb-close" aria-label="Close photo viewer" class="lb-btn absolute -top-3 right-0 sm:-right-3">✕</button>
+      <button type="button" id="lb-prev" aria-label="Previous photo" class="lb-btn absolute left-2 top-1/2 -translate-y-1/2">←</button>
+      <button type="button" id="lb-next" aria-label="Next photo" class="lb-btn absolute right-2 top-1/2 -translate-y-1/2">→</button>
+    </div>
+  </dialog>
+
   <ContactCTA />
 </Layout>

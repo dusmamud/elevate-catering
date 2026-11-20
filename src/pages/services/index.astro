@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Picture from '../../components/Picture.astro';
 import PageHero from '../../components/PageHero.astro';
 import ServicesSection from '../../components/ServicesSection.astro';
 import ContactCTA from '../../components/ContactCTA.astro';
@@ -14,7 +15,7 @@ const lead = 'Six catering services — corporate events, weddings, private part
     <div class="mx-auto grid max-w-6xl gap-4 md:grid-cols-2">
       {services.map((s) => (
         <a href={`/services/${s.slug}/`} class="reveal group overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-line transition hover:ring-gold">
-          <img src={s.img} alt={s.title} width="900" height="560" loading="lazy" class="aspect-[16/10] w-full object-cover transition group-hover:scale-105" />
+          <Picture src={s.img} alt={s.title} width="900" height="560" loading="lazy" class="aspect-[16/10] w-full object-cover transition group-hover:scale-105" />
           <div class="p-6">
             <p class="font-display text-sm font-bold text-gold-deep">{s.num} · {s.price}</p>
             <h2 class="mt-2 font-display text-2xl font-bold text-forest group-hover:text-gold-deep">{s.title}</h2>

@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Picture from '../components/Picture.astro';
 import PageHero from '../components/PageHero.astro';
 import StatsBar from '../components/StatsBar.astro';
 import ContactCTA from '../components/ContactCTA.astro';
@@ -11,7 +12,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'AboutPage', name: '
   <PageHero eyebrow="About Us" title="Food worth remembering." lead={lead} />
   <section class="bg-cream px-4 pb-14 sm:px-6">
     <div class="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-2">
-      <img src="/images/chef-plating.jpg" alt="Elevate chef plating a dish" width="1000" height="667" loading="lazy" class="reveal w-full rounded-3xl object-cover" />
+      <Picture src="/images/chef-plating.jpg" alt="Elevate chef plating a dish" width="1000" height="667" loading="lazy" class="reveal w-full rounded-3xl object-cover" />
       <div class="reveal">
         <h2 class="font-display text-3xl font-bold text-forest">A kitchen that hosts like family</h2>
         <p class="mt-4 leading-relaxed text-ink/70">We are chefs, event captains and menu designers from Mumbai's best hotel kitchens — united by a simple standard: serve nothing we would not proudly serve at our own family's table. That means seasonal, farm-to-table ingredients, menus designed around your guests (including veg, vegan, Jain and gluten-free paths), and presentation elegant enough for the photos your event deserves.</p>
@@ -27,7 +28,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'AboutPage', name: '
       <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {team.map((m) => (
           <article class="reveal overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-line">
-            <img src={m.img} alt={m.name} width="640" height="420" loading="lazy" class="aspect-[3/2] w-full object-cover" />
+            <Picture src={m.img} alt={m.name} width="640" height="420" loading="lazy" class="aspect-[3/2] w-full object-cover" />
             <div class="p-5"><h3 class="font-display text-lg font-bold text-forest">{m.name}</h3><p class="text-xs font-semibold text-gold-deep">{m.role}</p><p class="mt-2 text-sm leading-relaxed text-ink/65">{m.bio}</p></div>
           </article>
         ))}

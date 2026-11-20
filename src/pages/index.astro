@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Picture from '../components/Picture.astro';
 import Cloche from '../components/Cloche.astro';
 import PillarCards from '../components/PillarCards.astro';
 import StatsBar from '../components/StatsBar.astro';
@@ -13,6 +14,7 @@ import PricingHint from '../components/PricingHint.astro';
 import BlogPreview from '../components/BlogPreview.astro';
 import FaqPreview from '../components/FaqPreview.astro';
 import ContactCTA from '../components/ContactCTA.astro';
+import InstaGrid from '../components/InstaGrid.astro';
 import { occasions, contact } from '../data/site';
 
 const jsonLd = {
@@ -39,6 +41,7 @@ const lead = 'Elevate Catering — culinary excellence for corporate events, wed
     <div class="pointer-events-none absolute -left-40 bottom-0 h-[320px] w-[320px] rounded-full bg-sage/70" aria-hidden="true"></div>
     <div class="relative mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-2">
       <div>
+        <p data-hero class="mb-6 inline-block rounded-full bg-forest px-4 py-2 text-xs font-semibold text-cream">Now booking — 2026–27 wedding season · Limited weekend dates · <a href="/tastings/" class="font-bold text-gold underline underline-offset-4 hover:text-cream">Book a tasting</a></p>
         <div data-hero class="flex flex-col items-start">
           <Cloche size={54} />
           <p class="mt-2 font-display text-2xl font-bold tracking-[0.22em] text-forest">ELEVATE</p>
@@ -50,10 +53,10 @@ const lead = 'Elevate Catering — culinary excellence for corporate events, wed
           <a href="/quote/" data-magnetic class="rounded-full bg-gold px-7 py-3.5 text-sm font-bold text-forest shadow-lg shadow-gold/30 transition hover:bg-forest hover:text-cream">Get a Quote</a>
           <a href="/menus/" class="rounded-full border border-forest/25 px-6 py-3.5 text-sm font-semibold text-forest transition hover:border-gold hover:text-gold-deep">View Menus</a>
         </div>
-        <p data-hero class="mt-5 flex items-center gap-2 text-sm text-ink/60"><span class="text-gold-deep" role="img" aria-label="Rated 4.9 out of 5 stars">★★★★★</span> 4.9 from 600+ events · FSSAI licensed · From ₹1,450/guest</p>
+        <p data-hero class="mt-5 flex items-center gap-2 text-sm text-ink/70"><span class="text-gold-deep" role="img" aria-label="Rated 4.9 out of 5 stars">★★★★★</span> 4.9 from 600+ events · FSSAI licensed · From ₹1,450/guest</p>
       </div>
       <div data-hero data-parallax class="relative">
-        <img src="/images/hero-salad.jpg" alt="Overhead caprese chicken salad bowl with cherry tomatoes, mozzarella, basil and a small bowl of green pesto" width="1200" height="1200" fetchpriority="high" class="relative z-10 mx-auto aspect-square w-full max-w-[540px] rounded-full object-cover shadow-2xl shadow-forest/20 ring-8 ring-white" />
+        <Picture src="/images/hero-salad.jpg" sizes="(max-width: 1024px) 92vw, 540px" eager alt="Overhead caprese chicken salad bowl with cherry tomatoes, mozzarella, basil and a small bowl of green pesto" width="1200" height="1200" fetchpriority="high" class="relative z-10 mx-auto aspect-square w-full max-w-[540px] rounded-full object-cover shadow-2xl shadow-forest/20 ring-8 ring-white" />
         <span class="absolute bottom-6 left-2 z-20 rounded-full bg-white/95 px-4 py-2 text-xs font-bold text-forest shadow sm:left-6">850+ events catered</span>
         <span class="absolute right-2 top-8 z-20 rounded-full bg-forest px-4 py-2 text-xs font-bold text-cream shadow sm:right-6">Tastings available</span>
       </div>
@@ -70,10 +73,10 @@ const lead = 'Elevate Catering — culinary excellence for corporate events, wed
         {occasions.map((o) => (
           <a href={o.href} class="reveal project-card group">
             <span class="block overflow-hidden rounded-2xl">
-              <img src={o.img} alt={o.title} width="800" height="600" loading="lazy" class="aspect-[4/3] w-full object-cover" />
+              <Picture src={o.img} alt={o.title} width="800" height="600" loading="lazy" class="aspect-[4/3] w-full object-cover" />
             </span>
             <h3 class="mt-4 font-display text-xl font-bold text-forest group-hover:text-gold-deep">{o.title}</h3>
-            <p class="mt-0.5 text-sm text-ink/55">{o.text}</p>
+            <p class="mt-0.5 text-sm text-ink/70">{o.text}</p>
           </a>
         ))}
       </div>
@@ -95,10 +98,11 @@ const lead = 'Elevate Catering — culinary excellence for corporate events, wed
   <BlogPreview />
 
   <section class="bg-cream px-4 pb-4 sm:px-6" aria-label="Trust signals">
-    <div class="reveal mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-2 rounded-2xl bg-white px-6 py-4 text-center text-xs font-semibold text-ink/60 shadow-sm ring-1 ring-line">
+    <div class="reveal mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-2 rounded-2xl bg-white px-6 py-4 text-center text-xs font-semibold text-ink/70 shadow-sm ring-1 ring-line">
       <span>✓ FSSAI Licensed Kitchen</span><span>✓ Trained, Uniformed Staff</span><span>✓ Veg · Vegan · Jain · Gluten-Free</span><span>✓ {contact.hours}</span><span>✓ Mumbai · Delhi · Bengaluru</span>
     </div>
   </section>
 
+  <InstaGrid />
   <ContactCTA />
 </Layout>

@@ -1,0 +1,110 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import { tastingFormats, tastingFaqs, contact } from '../data/site';
+const lead = 'A tasting is where catering stops being a promise. Taste your actual shortlist, meet the chef, and book only when your palate agrees — tasting fees are adjusted against your booking.';
+const jsonLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'Elevate Catering Tastings', description: lead, provider: { '@type': 'FoodEstablishment', name: 'Elevate Catering' }, offers: tastingFormats.map((f) => ({ '@type': 'Offer', name: f.name, price: f.price.replace(/[^0-9]/g, ''), priceCurrency: 'INR' })) };
+---
+<Layout title="Book a Tasting — Elevate Catering" description={lead} jsonLd={jsonLd} lead={lead}>
+  <PageHero eyebrow="Book a Tasting" title="Taste it before you book it." lead={lead} />
+  <section class="bg-cream px-4 pb-14 sm:px-6">
+    <div class="mx-auto max-w-6xl">
+      <div class="grid gap-5 md:grid-cols-3">
+        {tastingFormats.map((f) => (
+          <article class:list={['reveal flex flex-col rounded-3xl p-6 shadow-sm ring-1', f.popular ? 'bg-forest text-cream ring-forest' : 'bg-white ring-line']}>
+            {f.popular && <p class="inline-block self-start rounded-full bg-gold px-3 py-1 text-[11px] font-black uppercase tracking-wider text-forest">Most booked</p>}
+            <h2 class="mt-3 font-display text-2xl font-bold">{f.name}</h2>
+            <p class="mt-2 font-display text-3xl font-bold">{f.price} <span class:list={['text-base font-normal', f.popular ? 'text-cream/70' : 'text-ink/70']}>{f.forLabel} · {f.dishes}</span></p>
+            <p class:list={['mt-3 text-sm leading-relaxed', f.popular ? 'text-cream/80' : 'text-ink/70']}>{f.text}</p>
+            <ul class="mt-4 flex-1 space-y-2 text-sm">
+              {f.includes.map((inc) => (<li class="flex gap-2"><span class={f.popular ? 'text-gold' : 'text-gold-deep'}>✓</span>{inc}</li>))}
+            </ul>
+            <a href="#tasting-form" class:list={['mt-6 block rounded-full px-5 py-3 text-center text-sm font-bold transition', f.popular ? 'bg-gold text-forest hover:bg-cream' : 'bg-forest text-cream hover:bg-gold hover:text-forest']}>Book this tasting</a>
+          </article>
+        ))}
+      </div>
+
+      <div class="reveal mt-10 grid gap-4 rounded-3xl bg-sage/70 p-6 sm:grid-cols-3 sm:p-8">
+        <div><h3 class="font-display text-lg font-bold text-forest">1 · Pick a format</h3><p class="mt-1 text-sm leading-relaxed text-ink/70">Choose by party size and how deep you want to go — two guests to a full chef's table.</p></div>
+        <div><h3 class="font-display text-lg font-bold text-forest">2 · Taste the shortlist</h3><p class="mt-1 text-sm leading-relaxed text-ink/70">Your actual dishes, plated as they will be served — including Jain, vegan and gluten-free paths.</p></div>
+        <div><h3 class="font-display text-lg font-bold text-forest">3 · Book with certainty</h3><p class="mt-1 text-sm leading-relaxed text-ink/70">Your tasting fee is adjusted against the booking. The menu you approved is the menu you get.</p></div>
+      </div>
+
+      <div class="mt-12 grid gap-10 lg:grid-cols-[1fr_1.3fr]">
+        <div class="reveal">
+          <h2 class="font-display text-2xl font-bold text-forest">Tasting questions</h2>
+          <div class="mt-4 space-y-3">
+            {tastingFaqs.map((f, i) => (
+              <div class="faq-item rounded-2xl bg-white shadow-sm ring-1 ring-line">
+                <button type="button" data-faq-btn aria-expanded={i === 0 ? 'true' : 'false'} aria-controls={`tf-panel-${i}`} id={`tf-btn-${i}`} class="flex w-full items-center justify-between gap-4 p-5 text-left font-display text-base font-bold text-forest">{f.q}<span class="faq-icon shrink-0 text-gold-deep" aria-hidden="true">+</span></button>
+                <div id={`tf-panel-${i}`} class="faq-panel" data-open={i === 0 ? 'true' : 'false'} role="region" aria-labelledby={`tf-btn-${i}`}><div><p class="px-5 pb-5 text-sm leading-relaxed text-ink/70">{f.a}</p></div></div>
+              </div>
+            ))}
+          </div>
+          <p class="mt-5 text-sm text-ink/70">At our Bandra West kitchen studio · {contact.hours}<br />Or write to <a href={`mailto:${contact.email}`} class="font-semibold text-gold-deep underline-offset-4 hover:underline">{contact.email}</a></p>
+        </div>
+
+        <form id="tasting-form" class="reveal rounded-3xl bg-white p-6 shadow-sm ring-1 ring-line sm:p-8" novalidate>
+          <h2 class="font-display text-2xl font-bold text-forest">Book your tasting</h2>
+          <div class="mt-5">
+            <label for="tf-format" class="text-sm font-semibold text-forest">Tasting format</label>
+            <select id="tf-format" class="mt-1.5 w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink outline-none focus:border-gold">
+              {tastingFormats.map((f) => (<option value={f.name}>{f.name} — {f.price} {f.forLabel}</option>))}
+            </select>
+          </div>
+          <div class="mt-4 grid gap-4 sm:grid-cols-2">
+            <div>
+              <label for="tf-name" class="text-sm font-semibold text-forest">Your name *</label>
+              <input id="tf-name" required minlength="2" placeholder="Full name" aria-describedby="tf-name-error" class="mt-1.5 w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink outline-none placeholder:text-ink/35 focus:border-gold" />
+              <p id="tf-name-error" class="field-error invisible text-red-600" role="alert"></p>
+            </div>
+            <div>
+              <label for="tf-email" class="text-sm font-semibold text-forest">Email *</label>
+              <input id="tf-email" type="email" required placeholder="you@example.com" aria-describedby="tf-email-error" class="mt-1.5 w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink outline-none placeholder:text-ink/35 focus:border-gold" />
+              <p id="tf-email-error" class="field-error invisible text-red-600" role="alert"></p>
+            </div>
+          </div>
+          <div class="mt-4 grid gap-4 sm:grid-cols-2">
+            <div>
+              <label for="tf-date" class="text-sm font-semibold text-forest">Preferred date *</label>
+              <input id="tf-date" type="date" required aria-describedby="tf-date-error" class="mt-1.5 w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink outline-none focus:border-gold" />
+              <p id="tf-date-error" class="field-error invisible text-red-600" role="alert"></p>
+            </div>
+            <div>
+              <label for="tf-event" class="text-sm font-semibold text-forest">Your event (optional)</label>
+              <input id="tf-event" placeholder="e.g. Wedding, Dec, ~300 guests" class="mt-1.5 w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink outline-none placeholder:text-ink/35 focus:border-gold" />
+              <p class="field-error invisible" aria-hidden="true"></p>
+            </div>
+          </div>
+          <button type="submit" data-magnetic class="mt-4 w-full rounded-full bg-forest py-3.5 text-sm font-bold text-cream transition hover:bg-gold hover:text-forest sm:w-auto sm:px-8">Request My Tasting →</button>
+          <p class="mt-3 text-xs text-ink/70">Demo form — no backend. Submitting opens your email app (mailto) with your tasting request prefilled. We confirm your slot within one working day.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+  <ContactCTA />
+  <script>
+    const form = document.getElementById('tasting-form');
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const err = (input, msg) => { const e = document.getElementById(input.id + '-error'); if (e) { e.textContent = msg; e.classList.remove('invisible'); } input.setAttribute('aria-invalid', 'true'); };
+    const clear = (input) => { const e = document.getElementById(input.id + '-error'); if (e) { e.textContent = ''; e.classList.add('invisible'); } input.removeAttribute('aria-invalid'); };
+    const nameEl = document.getElementById('tf-name');
+    const emailEl = document.getElementById('tf-email');
+    const dateEl = document.getElementById('tf-date');
+    const okName = () => { if (nameEl.value.trim().length < 2) { err(nameEl, 'Please enter your name.'); return false; } clear(nameEl); return true; };
+    const okEmail = () => { if (!emailRe.test(emailEl.value.trim())) { err(emailEl, 'Please enter a valid email address.'); return false; } clear(emailEl); return true; };
+    const okDate = () => { if (!dateEl.value) { err(dateEl, 'Please pick a preferred date.'); return false; } clear(dateEl); return true; };
+    nameEl?.addEventListener('blur', okName); emailEl?.addEventListener('blur', okEmail); dateEl?.addEventListener('blur', okDate);
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const ok = [okName(), okEmail(), okDate()];
+      if (ok.includes(false)) { document.querySelector('[aria-invalid="true"]')?.focus(); return; }
+      const format = document.getElementById('tf-format').value;
+      const event = document.getElementById('tf-event').value.trim();
+      const body = `Hi Elevate Catering team,\n\nI would like to book a tasting.\n\nName: ${nameEl.value.trim()}\nEmail: ${emailEl.value.trim()}\nFormat: ${format}\nPreferred date: ${dateEl.value}\n${event ? 'My event: ' + event + '\n' : ''}\nPlease confirm my slot. Thank you!`;
+      window.location.href = `mailto:hello@elevatecatering.in?subject=${encodeURIComponent('Tasting booking — ' + nameEl.value.trim())}&body=${encodeURIComponent(body)}`;
+      form.reset();
+    });
+  </script>
+</Layout>
